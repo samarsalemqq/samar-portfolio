@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #111214;
+  color: #f2f2f3;
+}
+
+/* Thin, subtle scrollbar that fits the dark theme */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #111214;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #2a2c30;
+  border-radius: 999px;
+}
+
+/* Small utility for section anchors so the sticky navbar doesn't cover headings */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+/* Keeps headings from breaking into a short, awkward last line */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* The single shared content container used by the Navbar and every section
+   (Hero, Selected Work, About, Skills, Contact, Footer), so everything lines
+   up to the same edges. A normal modern site width — not too narrow, not
+   overly stretched — with padding that grows a little at each breakpoint. */
+.container-site {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 640px) {
+  .container-site {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-site {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
