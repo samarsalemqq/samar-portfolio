@@ -2,49 +2,73 @@ import { Project } from "@/types/project";
 
 
 export const projects: Project[] = [
-  {
-    slug: "suhail",
-    title: "Suhail",
-    category: "iOS Application",
-    status: "Featured Project",
-    tech: ["SwiftUI", "SwiftData", "Figma"],
-    description:
-      "A safety application for desert trips that helps users store trip, vehicle, and emergency information before starting their journey.",
-    roleTitle: "iOS Developer & Designer",
-    overview:
-      "Suhail is a safety-focused iOS app built for people heading out on desert trips in Saudi Arabia. Before setting off, users log their route, vehicle details, and emergency contacts so that this information is ready to share the moment something goes wrong. The project was designed and built during my time at the Apple Developer Academy, where it was featured at the Academy's showcase.",
-    problem:
-      "Desert trips in Saudi Arabia are a popular weekend activity, but travelers rarely prepare an easy way to share their route, vehicle, and emergency details before setting off — information that becomes critical the moment something goes wrong in a remote, low-connectivity area.",
-    solution:
-      "Suhail gives travelers a calm, offline-first place to log their trip before they leave: route and expected return time, vehicle details, and emergency contacts, all ready to share in one tap if plans change or an emergency happens.",
-    role:
-      "I led the end-to-end design and development: user research, Figma prototyping, and the full SwiftUI/SwiftData implementation.",
-    features: [
-      "Trip profiles with route, destination, and expected return time",
-      "Vehicle information storage (type, plate number, fuel level)",
-      "Emergency contact list with one-tap sharing",
-      "Offline-first data storage using SwiftData",
-      "Clean, calm interface designed for use under stress",
-    ],
-    challenges:
-      "The biggest challenge was designing for a high-stress, low-connectivity context — the app needed to work fully offline and surface critical information in a single glance, without overwhelming the user with settings or setup steps.",
-    learnings:
-      "Suhail taught me how to design for real-world safety scenarios, and deepened my hands-on experience with SwiftData for local-first apps and with translating user research directly into interface decisions.",
-    cover: "/images/projects/suhail-cover.png",
-    gallery: [
-      "/images/projects/suhail-1.png",
-      "/images/projects/suhail-2.png",
-      "/images/projects/suhail-3.png",
-    ],
-    links: {
-      github: "#",
-      live: "#",
-    },
-    featured: true,
+ {
+  slug: "suhail",
+  title: "Suhail",
+  category: "iOS Application",
+  status: "Featured Project",
+  published: true,
+
+  tech: [
+    "SwiftUI",
+    "Localization",
+    "Lottie",
+    "Figma",
+  ],
+
+  description:
+    "An off-road safety application that helps travelers prepare their trip details and keeps trusted contacts informed during emergencies.",
+
+  roleTitle: "iOS Developer & UI/UX Contributor",
+
+  overview:
+    "Suhail is an off-road safety application designed for travelers heading into remote areas. Users can register their trip, vehicle information, expected return time, and emergency contacts before departure. If a traveler becomes overdue and no recent location updates are available, trusted contacts can receive an emergency SMS or WhatsApp message containing the latest available location and trip details. The application was developed collaboratively during the Apple Developer Academy, selected for the graduation showcase, and published on the App Store.",
+
+  problem:
+    "Off-road travelers may lose connectivity or become overdue without having a simple way to share essential trip information with family or trusted contacts. In an emergency, missing route, vehicle, and location details can delay the response process.",
+
+  solution:
+    "Suhail provides a structured way to register off-road trips before departure and keeps important information ready when needed. It supports background trip monitoring, emergency alerts, local safety notifications, and access to recorded trip details in both Arabic and English.",
+
+  role:
+    "I developed major parts of the iOS interface using SwiftUI, translated the provided design system into reusable UI components, and created reusable page templates that made navigation and screen integration easier to maintain. I also implemented Arabic and English localization, integrated Lottie for the splash experience, used mock data while developing and testing the interfaces, and contributed to improving parts of the application flow and logic. The project was developed collaboratively during the Apple Developer Academy.",
+
+  features: [
+    "Off-road trip registration and management",
+    "Automatic emergency alerts through SMS or WhatsApp",
+    "Background trip monitoring",
+    "Context-aware local safety notifications",
+    "Local trip history with recorded routes",
+    "Arabic and English localization",
+  ],
+
+  challenges:
+    "One of my main challenges was translating a complete design system into reusable SwiftUI components and page templates while keeping the navigation flow consistent across the application. The interfaces also needed to remain clear and easy to use in stressful, low-connectivity situations.",
+
+  learnings:
+    "This project strengthened my experience in building reusable SwiftUI components, structuring screens through page templates, implementing localization, working with mock data during UI development, and collaborating with a multidisciplinary team on application flows and logic.",
+
+  cover: "/images/projects/suhail-cover.png",
+  overviewImage: "/images/projects/suhail-overview.png",
+  roleImage: "/images/projects/Code.png",
+
+  gallery: [
+    "/images/projects/suhail-1.png",
+    "/images/projects/suhail-2.png",
+    "/images/projects/suhail-3.png",
+  ],
+
+  links: {
+    github: "https://github.com/ArwaAlkadi/Suhail",
+    live: "https://apps.apple.com/sa/app/suhail/id6775820204",
   },
+
+  featured: true,
+},
   {
     slug: "steepish",
     title: "Steepish",
+      published: false,
     category: "iOS Application",
     status: "Published on App Store",
     tech: ["SwiftUI", "iOS"],
@@ -82,6 +106,7 @@ export const projects: Project[] = [
   {
     slug: "riyadh-dictionary",
     title: "Riyadh Dictionary",
+      published: false,
     category: "Mobile Application",
     status: "Professional Project",
     tech: ["React Native", "Expo", "REST APIs"],
@@ -121,6 +146,7 @@ export const projects: Project[] = [
   {
     slug: "language-games",
     title: "Language Games",
+      published: false,
     category: "Mobile Application",
     status: "Currently Developing",
     tech: ["React Native", "Expo", "WebView", "JSON"],
@@ -147,6 +173,8 @@ export const projects: Project[] = [
     learnings:
       "This project deepened my understanding of WebView-based architectures in React Native and how to structure large, JSON-driven content libraries cleanly.",
     cover: "/images/projects/language-games-cover.png",
+    overviewImage: "/images/projects/language-games-1.png",
+    roleImage: "/images/projects/language-games-2.png",
     gallery: [
       "/images/projects/language-games-1.png",
       "/images/projects/language-games-2.png",
@@ -159,6 +187,7 @@ export const projects: Project[] = [
   {
     slug: "stepaware",
     title: "StepAware",
+      published: false,
     category: "Hardware & Mobile",
     status: "Graduation Project",
     tech: ["Arduino", "Sensors", "GPS", "Telegram Bot"],
@@ -196,6 +225,7 @@ export const projects: Project[] = [
   {
     slug: "talaq",
     title: "Talaq",
+      published: false,
     category: "UI/UX Design",
     status: "UI/UX Case Study",
     tech: ["Figma", "User Research", "Wireframes", "Prototyping"],
