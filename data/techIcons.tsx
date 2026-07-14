@@ -14,8 +14,6 @@ import {
   SiPostman,
   SiXcode,
   SiHtml5,
-  SiCss3,
-  SiVisualstudiocode,
   SiArduino,
   SiTelegram,
   SiApple,
@@ -37,12 +35,7 @@ import {
   Code2,
 } from "lucide-react";
 
-// Maps a technology name (as used in data/projects.ts and Skills.tsx) to an
-// icon. Prefer official brand icons (Simple Icons, via react-icons/si) and
-// fall back to a Lucide icon when no official logo exists.
-//
-// To add a new technology: add a "Name": Icon entry below. Anything not
-// found here falls back to a generic code icon, so nothing ever breaks.
+
 export const techIcons: Record<string, IconType> = {
   // Mobile
   Swift: SiSwift,
@@ -54,7 +47,6 @@ export const techIcons: Record<string, IconType> = {
 
   // Frontend
   HTML: SiHtml5,
-  CSS: SiCss3,
   JavaScript: SiJavascript,
   TypeScript: SiTypescript,
   React: SiReact,
@@ -84,7 +76,6 @@ export const techIcons: Record<string, IconType> = {
   Git: SiGit,
   GitHub: SiGithub,
   Xcode: SiXcode,
-  "VS Code": SiVisualstudiocode,
   Postman: SiPostman,
   TestFlight: Rocket,
 
@@ -98,7 +89,6 @@ export const techIcons: Record<string, IconType> = {
   CoreLocation: LocateFixed,
 };
 
-// Generic fallback used for any technology name not found in the map above.
 export const defaultTechIcon: IconType = Code2;
 
 export function getTechIcon(name: string): IconType {
