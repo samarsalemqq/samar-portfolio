@@ -107,7 +107,7 @@ export const projects: Project[] = [
     slug: "riyadh-dictionary",
     title: "Riyadh Dictionary",
       published: false,
-    category: "Mobile Application",
+    category: "IoT & Embedded Systems",
     status: "Professional Project",
     tech: ["React Native", "Expo", "REST APIs"],
     description:
@@ -185,42 +185,63 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "stepaware",
-    title: "StepAware",
-      published: false,
-    category: "Hardware & Mobile",
-    status: "Graduation Project",
-    tech: ["Arduino", "Sensors", "GPS", "Telegram Bot"],
-    description:
-      "A smart bracelet designed to help visually impaired users navigate safely using ultrasonic sensors and emergency location sharing.",
-    roleTitle: "Hardware & Mobile Developer",
-    overview:
-      "StepAware is a smart bracelet built for my graduation project, designed to help visually impaired users move around more safely. Ultrasonic sensors detect nearby obstacles, and a GPS module paired with a Telegram bot can share the user's live location in an emergency.",
-    problem:
-      "Visually impaired users often lack an affordable, wearable way to detect nearby obstacles and quickly share their location with family or caregivers if they need help.",
-    solution:
-      "StepAware pairs ultrasonic obstacle detection with GPS tracking in a low-power wearable bracelet, and uses a Telegram bot to instantly share the wearer's live location in an emergency.",
-    role:
-      "I worked on the hardware and firmware (Arduino, ultrasonic sensors, GPS module) as well as the Telegram bot integration for emergency alerts.",
-    features: [
-      "Ultrasonic obstacle detection with haptic/audio feedback",
-      "GPS-based location tracking",
-      "Telegram bot for emergency location sharing",
-      "Low-power wearable hardware design",
-    ],
-    challenges:
-      "Balancing sensor accuracy, battery life, and wearable comfort, while making sure the emergency alert flow was fast and reliable when it mattered most.",
-    learnings:
-      "StepAware gave me hands-on experience combining embedded hardware with a mobile-facing service (Telegram), and designing assistive technology around real accessibility needs.",
-    cover: "/images/projects/stepaware-cover.png",
-    gallery: [
-      "/images/projects/stepaware-1.png",
-      "/images/projects/stepaware-2.png",
-    ],
-    links: {
-      github: "#",
-      live: "#",
-    },
+ slug: "stepaware",
+title: "StepAware",
+published: false,
+category: "IoT & Embedded Systems",
+status: "Graduation Project",
+
+tech: [
+  "Arduino",
+  "Ultrasonic Sensors",
+  "GPS",
+  "Telegram Bot",
+],
+
+description:
+  "A smart wearable bracelet designed to improve safe navigation and emergency response for people with visual impairments.",
+
+roleTitle:
+  "Software & Embedded Systems Developer",
+
+overview:
+  "StepAware is a smart wearable bracelet developed as my graduation project to support people with visual impairments in navigating their surroundings more safely. The system combines ultrasonic sensors for obstacle detection with GPS tracking and Telegram integration, allowing emergency contacts to receive the user's live location when assistance is needed.",
+
+problem:
+  "People with visual impairments can face difficulties detecting nearby obstacles and quickly sharing their location during emergency situations, limiting their independence and delaying assistance.",
+
+solution:
+  "StepAware combines obstacle detection, GPS tracking, and emergency communication in a wearable device. The bracelet detects nearby obstacles, alerts the user instantly, and sends the current location to trusted contacts through a Telegram bot when emergency assistance is required.",
+
+role:
+  "I designed and developed the embedded system using Arduino, integrated ultrasonic sensors and the GPS module, implemented Telegram Bot communication for emergency alerts, and participated in testing and improving the overall user experience.",
+
+features: [
+  "Real-time obstacle detection",
+  "Ultrasonic sensor integration",
+  "GPS location tracking",
+  "Emergency SOS functionality",
+  "Telegram Bot notifications",
+  "Wearable assistive technology",
+],
+
+challenges:
+  "Developing a reliable wearable device required balancing sensor accuracy, power consumption, hardware limitations, and fast emergency communication while keeping the solution practical for everyday use.",
+
+learnings:
+  "This project strengthened my understanding of embedded systems, IoT development, hardware and software integration, sensor-based applications, and designing technology that improves accessibility and user independence.",
+
+cover: "/images/projects/stepaware-cover.png",
+
+gallery: [
+  "/images/projects/stepaware-1.png",
+  "/images/projects/stepaware-2.png",
+],
+
+links: {
+  github: "#",
+  live: "#",
+},
   },
   {
     slug: "talaq",

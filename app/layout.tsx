@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://samaralqahtani.dev"),
+  metadataBase: new URL("https://samar-portfolio-mu.vercel.app"),
   title: {
     default: `${siteConfig.name} — ${siteConfig.title}`,
     template: `%s — ${siteConfig.name}`,
@@ -47,6 +49,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+         <Analytics />
       </body>
     </html>
   );
