@@ -21,6 +21,7 @@ import TechBadge from "@/components/TechBadge";
 const statusIcons: Record<string, typeof Award> = {
   "Featured Project": Award,
   "Published on App Store": Rocket,
+  "TestFlight Beta": Rocket,
   "Professional Project": Building2,
   "Currently Developing": Clock,
   "Graduation Project": GraduationCap,

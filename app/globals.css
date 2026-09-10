@@ -33,10 +33,11 @@ section[id] {
   text-wrap: balance;
 }
 
-/* The single shared content container used by the Navbar and every section
-   (Hero, Selected Work, About, Skills, Contact, Footer), so everything lines
-   up to the same edges. A normal modern site width — not too narrow, not
-   overly stretched — with padding that grows a little at each breakpoint. */
+/* The single shared content container used by every section (Hero, Selected
+   Work, About, Skills, Contact, Footer), so everything lines up to the same
+   edges. A normal modern site width — not too narrow, not overly stretched —
+   with padding that grows a little at each breakpoint. The Navbar opts out of
+   the max-width so its contents run edge to edge, keeping only the padding. */
 .container-site {
   margin-left: auto;
   margin-right: auto;

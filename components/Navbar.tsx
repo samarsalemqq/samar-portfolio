@@ -81,25 +81,23 @@ export default function Navbar() {
       }`}
     >
       <nav
-        className="container-site flex items-center justify-between py-4"
+        className="relative flex items-center justify-between px-6 py-4 sm:px-8 lg:px-12"
         aria-label="Primary"
       >
         <Link
           href="/#home"
-          className="group flex items-center gap-2.5"
+          className="group flex items-baseline gap-px text-base font-semibold tracking-tight"
           aria-label={`${siteConfig.name}, back to top`}
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-dark text-sm font-semibold text-white shadow-sm shadow-accent/30 transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
-            {siteConfig.initials}
-          </span>
-          <span className="hidden text-sm font-medium text-gray-400 transition-colors group-hover:text-white sm:inline">
+          <span className="text-gray-200 transition-colors group-hover:text-white">
             {siteConfig.name}
           </span>
+          <span className="text-accent">.</span>
         </Link>
 
-        {/* Desktop links, with a small underline that lights up for the
-            section currently in view */}
-        <ul className="hidden items-center gap-8 lg:flex">
+        {/* Desktop links, centered in the bar, with a small underline that
+            lights up for the section currently in view */}
+        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex">
           {siteConfig.nav.map((item) => {
             const isActive = activeId === item.href.replace("/#", "");
             return (

@@ -11,13 +11,6 @@ export default function Contact() {
       <h2 className="animate-fade-up text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
         Let&apos;s work together
       </h2>
-      <p
-        className="mx-auto mt-5 max-w-xl animate-fade-up text-lg leading-relaxed text-gray-400"
-        style={{ animationDelay: "80ms" }}
-      >
-        Have a role or a project in mind? I&apos;d love to hear from you —
-        reach out through any of the channels below.
-      </p>
 
       <div
         className="mt-10 flex flex-wrap items-center justify-center gap-4 animate-fade-up"

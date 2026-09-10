@@ -11,7 +11,7 @@ export default function Projects() {
       <SectionHeading
         eyebrow="Work"
         title="Selected Work"
-        description="A mix of published apps, professional work, and design case studies — from idea to shipped product."
+        description="A collection of mobile applications and digital products I’ve built through professional work and personal projects."
         icon={FolderKanban}
         spacing="mb-8"
       />

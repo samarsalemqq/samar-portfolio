@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${siteConfig.name} — ${siteConfig.title}`,
     description:
-      "I build intuitive mobile applications and digital experiences, with experience in iOS development, React Native, API integration, and UI/UX design.",
+      "I build intuitive mobile applications and digital experiences, combining iOS development, React Native, API integration, and UI/UX design to create practical and user-focused products.",
     type: "website",
   },
 };

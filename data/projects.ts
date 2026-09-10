@@ -106,37 +106,52 @@ export const projects: Project[] = [
   {
     slug: "riyadh-dictionary",
     title: "Riyadh Dictionary",
-      published: false,
-    category: "IoT & Embedded Systems",
-    status: "Professional Project",
-    tech: ["React Native", "Expo", "REST APIs"],
+    published: false,
+    category: "Mobile Application",
+    status: "TestFlight Beta",
+    tech: [
+      "UI/UX Design",
+      "Figma",
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "REST APIs",
+      "Core ML",
+      "iOS Share Extension",
+      "CocoaPods",
+    ],
     description:
-      "An interactive Arabic dictionary application with smart search, audio pronunciation, language games, and API integration.",
-    roleTitle: "React Native Developer",
+      "A ground-up redesign of معجم الرياض — the King Salman Global Academy's Contemporary Arabic Lexicon of 120,000+ entries. I reimagined the experience, then built it as a cross-platform app with voice search, a native iOS Share Extension, and on-device camera lookup. Currently in TestFlight beta.",
+    roleTitle: "Product Designer & React Native Developer",
     overview:
-      "Riyadh Dictionary is a mobile application that makes exploring the Arabic language interactive and accessible. It combines smart search, spoken pronunciation, and games so users can look up words and actually practice using them.",
+      "Riyadh Dictionary (معجم الرياض) puts the King Salman Global Academy for Arabic Language's Contemporary Arabic Lexicon — more than 120,000 entries — in your pocket. I carried the project end to end: a complete redesign of the app, the user-experience work behind it, and then the build itself in React Native (Expo). The result is a fast, genuinely RTL-first dictionary that reaches beyond typing a word — search by voice, look one up from inside any other app through a native iOS Share Extension, or point the camera at text and objects and let on-device Core ML find the match. The app is in TestFlight beta ahead of an App Store release.",
     problem:
-      "Existing Arabic dictionary tools tend to be static and text-only, which makes them slow to search and doesn't help users actually practice pronunciation or retain new words.",
+      "The dictionary held a world-class Arabic dataset, but the mobile experience didn't do it justice: navigation felt heavy, entries were hard to scan, and every lookup meant stopping to type. A large, standards-based lexicon deserved an interface as considered as its content.",
     solution:
-      "We built a fast, interactive dictionary with smart search and audio pronunciation, then layered in language games so looking up a word turns into practicing it.",
+      "I rebuilt the product from the ground up — redesigning every core screen around how people actually search, then implementing it on a clean, layered React Native architecture. Word entries were restructured for fast scanning, Arabic and right-to-left typography were treated as a first-class concern, and three quicker ways in — voice, Share Extension, and camera recognition — were layered on so the dictionary meets users where they already are.",
     role:
-      "I worked on the React Native/Expo mobile app, integrating REST APIs for search and pronunciation and building the game and navigation experience.",
+      "I owned the project end to end. I led the redesign and the UX — reworking the information architecture, navigation, and every core screen — then built the app in React Native (Expo) with TypeScript: a layered architecture (API services, response mappers, reusable hooks, screens and components) against the Riyadh Contemporary Arabic Lexicon API, plus the native iOS work — the Share Extension and the on-device Core ML image and camera recognition flow, wired through CocoaPods.",
     features: [
-      "Smart search across a large Arabic word database",
-      "Audio pronunciation for entries",
-      "Built-in language games to reinforce learning",
-      "REST API integration for dictionary and audio data",
-      "Smooth navigation optimized for everyday use",
+      "Redesigned, RTL-first interface built around how people search",
+      "Instant search across 120,000+ contemporary Arabic entries",
+      "Restructured word entries — meanings, examples, synonyms and antonyms — tuned for fast scanning",
+      "Browse by letter and filter by word type",
+      "Arabic voice search",
+      "Native iOS Share Extension — look up a word from any other app",
+      "Camera lookup with on-device Core ML text and object recognition",
     ],
     challenges:
-      "Keeping search fast and pronunciation audio in sync with the correct dictionary entry, while handling the nuances of Arabic text (diacritics, right-to-left layout) inside a React Native app.",
+      "Redesigning for Arabic meant making right-to-left layout, diacritics, and dense linguistic entries feel effortless rather than cramped. On the build side, the work was keeping a clean separation between the API layer and the UI as features grew, and bridging native iOS capabilities — Share Extension and Core ML — into an Expo project without compromising the design.",
     learnings:
-      "I gained practical experience integrating REST APIs at scale in React Native, and handling RTL-aware UI in a production mobile app.",
+      "Carrying one product from redesign through UX to a working beta sharpened how I move between the two — designing with the platform's constraints in mind, and building with the intent of the design intact. I also went deep on RTL-first mobile design, layered React Native architecture, and integrating native iOS features into an Expo app.",
     cover: "/images/projects/riyadh-dictionary-cover.png",
     gallery: [
       "/images/projects/riyadh-dictionary-1.png",
       "/images/projects/riyadh-dictionary-2.png",
+      "/images/projects/riyadh-dictionary-3.png",
     ],
+    // Repo is private and the app is still in TestFlight (no public App Store
+    // page yet), so both links are "#" and the buttons stay hidden.
     links: {
       github: "#",
       live: "#",

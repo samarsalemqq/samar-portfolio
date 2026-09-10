@@ -17,6 +17,7 @@ import {
   SiArduino,
   SiTelegram,
   SiApple,
+  SiCocoapods,
 } from "react-icons/si";
 import {
   Layers,
@@ -33,6 +34,10 @@ import {
   Activity,
   Satellite,
   Code2,
+  Cpu,
+  Share2,
+  ScanLine,
+  Palette,
 } from "lucide-react";
 
 
@@ -44,6 +49,10 @@ export const techIcons: Record<string, IconType> = {
   "React Native": SiReact,
   Expo: SiExpo,
   iOS: SiApple,
+  "Core ML": Cpu,
+  CocoaPods: SiCocoapods,
+  "iOS Share Extension": Share2,
+  "Camera Scanning": ScanLine,
 
   // Frontend
   HTML: SiHtml5,
@@ -65,6 +74,7 @@ export const techIcons: Record<string, IconType> = {
 
   // UI/UX
   Figma: SiFigma,
+  "UI/UX Design": Palette,
   Wireframing: Layout,
   Wireframes: Layout,
   Prototyping: Layers,
