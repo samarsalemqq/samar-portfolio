@@ -109,7 +109,7 @@ export const projects: Project[] = [
     title: "Riyadh Dictionary",
     published: true,
     category: "Mobile Application",
-    status: "App Store & Google Play",
+    status: "Published on App Store",
     tech: [
       "UI/UX Design",
       "Figma",
@@ -122,10 +122,10 @@ export const projects: Project[] = [
       "CocoaPods",
     ],
     description:
-      "A redesign of معجم الرياض, the King Salman Global Academy's Contemporary Arabic Lexicon of 120,000+ entries, rebuilt for iOS and Android with voice search, camera lookup, and a native iOS Share Extension.",
-    roleTitle: "Product Designer & React Native Developer",
+      "A redesign of معجم الرياض, the King Salman Global Academy's Contemporary Arabic Lexicon of 120,000+ entries, rebuilt in React Native with voice search, camera lookup, and a native iOS Share Extension.",
+    roleTitle: "React Native Developer & UI/UX Designer",
     overview:
-      "Riyadh Dictionary (معجم الرياض) is the mobile app for the King Salman Global Academy for Arabic Language's Contemporary Arabic Lexicon, more than 120,000 entries. I redesigned the existing app and developed new features for it, then built the redesigned version for iOS and Android in React Native, Expo, and TypeScript. Beyond typing a word, you can search by voice, point the camera at text or an object and let on-device Core ML find the match, or look a word up from inside another app through a native iOS Share Extension. The app is available on the App Store and Google Play.",
+      "Riyadh Dictionary (معجم الرياض) is the mobile app for the King Salman Global Academy for Arabic Language's Contemporary Arabic Lexicon, more than 120,000 entries. I redesigned the existing app and developed new features for it, then built the redesigned version in React Native, Expo, and TypeScript. Beyond typing a word, you can search by voice, point the camera at text or an object and let on-device Core ML find the match, or look a word up from inside another app through a native iOS Share Extension. The app is published on the App Store.",
     problem:
       "The dictionary held a world-class Arabic dataset, but the mobile experience didn't do it justice: navigation felt heavy, entries were hard to scan, and every lookup meant stopping to type. A large, standards-based lexicon deserved an interface as considered as its content.",
     solution:
@@ -144,7 +144,7 @@ export const projects: Project[] = [
     challenges:
       "Designing for Arabic meant giving typography, diacritics, right-to-left navigation, and dense linguistic entries careful attention, so that information stays easy to scan. On the build side, the Share Extension and camera recognition required working with native iOS code alongside an Expo-based React Native app. And as features grew, keeping API services, response mapping, hooks, screens, and components organized kept data handling clearly separate from the interface.",
     learnings:
-      "Taking an existing product through a redesign to a release on both stores taught me to design with the platform's constraints in mind, and to build with the intent of the design intact. I also went deeper on Arabic-first mobile design, structured React Native architecture, and bringing native iOS features into an Expo app.",
+      "Taking an existing product through a redesign to an App Store release taught me to design with the platform's constraints in mind, and to build with the intent of the design intact. I also went deeper on Arabic-first mobile design, structured React Native architecture, and bringing native iOS features into an Expo app.",
     cover: "/images/projects/riyadh-dictionary-cover.png",
     gallery: [
       "/images/projects/riyadh-dictionary-1.png",
