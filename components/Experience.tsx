@@ -10,6 +10,15 @@ const experience = [
     description:
       "Building mobile applications with API integration, WebView-based games, and TestFlight/Android deployment.",
     tech: ["React Native", "Expo", "REST APIs", "TestFlight"],
+    current: true,
+  },
+    {
+    company: "Saudi Electricity Company",
+    role: "IT Intern",
+    description:
+      "Completed an 8-week rotational internship across the networks, cybersecurity, data center, and web teams.",
+    tech: ["Networking", "Cybersecurity", "Data Center", "Web"],
+    current: false,
   },
 ];
 
@@ -26,9 +35,11 @@ export default function Experience() {
             role={item.role}
             description={item.description}
             tech={item.tech}
+            current={item.current}
             isLast={index === experience.length - 1}
           />
         ))}
+        
       </div>
     </section>
   );

@@ -2,17 +2,14 @@ import Link from "next/link";
 import { Github, Linkedin, Mail, ArrowRight, Download } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 import CursorGlow from "@/components/CursorGlow";
+import WavingPhone from "@/components/WavingPhone";
 
-// The first thing visitors see: job title, name, short pitch, CTAs and
-// social links. Sized like a normal website hero — no forced viewport
-// height, just balanced padding so it feels natural, not empty or cramped.
 export default function Hero() {
   return (
     <section
       id="home"
       className="group container-site relative flex flex-col justify-center overflow-hidden py-16 lg:py-24"
     >
-      {/* Soft accent glows in the background, purely decorative */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 right-0 h-80 w-80 rounded-full bg-accent/10 blur-3xl"
@@ -21,10 +18,12 @@ export default function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-accent/5 blur-3xl"
       />
-      {/* Subtle light that follows the cursor — only visible on hover, never distracting */}
       <CursorGlow />
 
-      <p className="mb-3 animate-fade-up text-lg font-medium text-accent-light sm:text-xl">
+      {/* The waving phone: small above the text on phones, large on the right on desktop */}
+      <WavingPhone className="relative mb-6 w-24 animate-fade-up lg:absolute lg:right-12 lg:top-1/2 lg:mb-0 lg:w-64 lg:-translate-y-1/2 xl:right-24" />
+
+        <p className="mb-3 animate-fade-up text-lg font-medium text-accent-light sm:text-xl">
         Software Engineer
       </p>
 
@@ -39,9 +38,8 @@ export default function Hero() {
         className="mt-6 max-w-2xl animate-fade-up text-lg leading-relaxed text-gray-400 sm:text-xl"
         style={{ animationDelay: "160ms" }}
       >
-        I build intuitive mobile applications and digital experiences, with
-        experience in iOS development, React Native, API integration, and
-        UI/UX design.
+        I build mobile apps for Arabic speakers, in SwiftUI and React Native.
+        My latest, Suhail, is an off-road safety app live on the App Store.
       </p>
 
       <div
@@ -50,9 +48,9 @@ export default function Hero() {
       >
         <Link
           href="/#projects"
-          className="group/btn inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-accent-dark hover:shadow-lg hover:shadow-accent/20"
+          className="group/btn inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-charcoal transition-all hover:bg-accent-dark hover:shadow-lg hover:shadow-accent/20"
         >
-          View My Work
+          View My Projects
           <ArrowRight
             size={16}
             aria-hidden="true"

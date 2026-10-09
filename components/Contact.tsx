@@ -8,9 +8,6 @@ export default function Contact() {
       <p className="mb-4 animate-fade-up text-sm font-medium uppercase tracking-widest text-accent-light">
         Contact
       </p>
-      <h2 className="animate-fade-up text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-        Let&apos;s work together
-      </h2>
 
       <div
         className="mt-10 flex flex-wrap items-center justify-center gap-4 animate-fade-up"
@@ -18,7 +15,7 @@ export default function Contact() {
       >
         <a
           href={`mailto:${siteConfig.email}`}
-          className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-accent-dark hover:shadow-lg hover:shadow-accent/20"
+          className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-charcoal transition-all hover:bg-accent-dark hover:shadow-lg hover:shadow-accent/20"
         >
           <Mail size={17} aria-hidden="true" />
           Email Me

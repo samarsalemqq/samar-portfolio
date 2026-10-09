@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   Github,
@@ -28,59 +27,43 @@ const statusIcons: Record<string, typeof Award> = {
   "UI/UX Case Study": Palette,
 };
 
-// Premium project card used in the Selected Work grid. Every card shares the
-// exact same structure, image ratio, and padding so a row always lines up —
-// visual emphasis (e.g. Suhail's "Featured Project") comes only from the
-// status badge, never from a different card size or layout.
-//
-// No divider lines inside the card — sections are told apart with spacing
-// and alignment only, with a single subtle border around the whole card.
-//
-// The card stretches to fill its grid row (h-full) and pins the action row
-// to the bottom (mt-auto), so cards with shorter descriptions still line up
-// with taller ones.
+// Project card used in the Selected Work list. Text only, no image: the
+// app's name is the largest thing on the card, and the screenshots live on
+// the project page. Each card is a full-width row with everything in one
+// column: category and status, name, description, role, technologies, then
+// the links.
 export default function ProjectCard({ project }: { project: Project }) {
   const StatusIcon = statusIcons[project.status] ?? Rocket;
   const isCaseStudy = project.status === "UI/UX Case Study";
+  // A link set to "#" in data/projects.ts means "no link" (for example a
+  // private repo), so its icon is not shown at all.
+  const hasGithubLink =
+    Boolean(project.links.github) && project.links.github !== "#";
+  const hasLiveLink =
+    Boolean(project.links.live) && project.links.live !== "#";
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-charcoal-border bg-charcoal-light transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-2xl hover:shadow-accent/10">
-      <Link href={`/projects/${project.slug}`} className="block shrink-0">
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-charcoal-lighter">
-          {/* Image path comes from data/projects.ts. If the file hasn't been
-              added yet under public/images/projects/, the card still renders
-              fine — only the image itself will be missing. */}
-          <Image
-            src={project.cover}
-            alt={`${project.title} cover`}
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal-light/90 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-        </div>
-      </Link>
-
+    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-charcoal-border bg-charcoal-light transition-all duration-300 hover:border-accent/40 hover:shadow-2xl hover:shadow-accent/10">
       <div className="flex flex-1 flex-col p-6 sm:p-7">
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           <span className="text-xs font-medium uppercase tracking-wide text-accent-light">
             {project.category}
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-charcoal-border px-3 py-1 text-[11px] font-medium text-gray-400">
+          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-charcoal-border px-3 py-1 text-[11px] font-medium text-gray-400">
             <StatusIcon size={13} aria-hidden="true" />
             {project.status}
           </span>
         </div>
 
-        <Link href={`/projects/${project.slug}`} className="mt-3 w-fit">
-          <h3 className="text-xl font-semibold text-white transition-colors group-hover:text-accent-light sm:text-2xl">
+        <Link href={`/projects/${project.slug}`} className="mt-5 w-fit">
+          <h3 className="text-3xl font-semibold tracking-tight text-white transition-colors group-hover:text-accent-light sm:text-4xl">
             {project.title}
           </h3>
         </Link>
 
         {/* Fixed to 3 lines so every card takes up the same vertical space
             here, regardless of how long the description text is. */}
-        <p className="mt-2 line-clamp-3 leading-relaxed text-gray-400">
+        <p className="mt-3 line-clamp-3 leading-relaxed text-gray-400">
           {project.description}
         </p>
 
@@ -102,6 +85,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             the space above it. */}
         <div className="mt-auto flex items-center justify-between pt-5">
           <div className="flex items-center gap-1.5">
+            {hasGithubLink ? (
             <a
               href={project.links.github}
               target="_blank"
@@ -111,6 +95,8 @@ export default function ProjectCard({ project }: { project: Project }) {
             >
               <Github size={17} />
             </a>
+            ) : null}
+            {hasLiveLink ? (
             <a
               href={project.links.live}
               target="_blank"
@@ -120,6 +106,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             >
               <ExternalLink size={17} />
             </a>
+            ) : null}
           </div>
 
           <Link

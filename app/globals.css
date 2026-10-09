@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  background-color: #111214;
+  background-color: #0d1320;
   color: #f2f2f3;
 }
 
@@ -16,28 +16,22 @@ body {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #111214;
+  background: #0d1320;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #2a2c30;
+  background-color: #27324a;
   border-radius: 999px;
 }
 
-/* Small utility for section anchors so the sticky navbar doesn't cover headings */
 section[id] {
   scroll-margin-top: 96px;
 }
 
-/* Keeps headings from breaking into a short, awkward last line */
 .text-balance {
   text-wrap: balance;
 }
 
-/* The single shared content container used by every section (Hero, Selected
-   Work, About, Skills, Contact, Footer), so everything lines up to the same
-   edges. A normal modern site width — not too narrow, not overly stretched —
-   with padding that grows a little at each breakpoint. The Navbar opts out of
-   the max-width so its contents run edge to edge, keeping only the padding. */
+
 .container-site {
   margin-left: auto;
   margin-right: auto;
@@ -57,5 +51,50 @@ section[id] {
   .container-site {
     padding-left: 48px;
     padding-right: 48px;
+  }
+}
+/* Waving phone (components/WavingPhone.tsx). The arm waves a few times on
+   load and again on hover; the phone bobs gently and its eyes blink. */
+.mascot-arm {
+  transform-box: view-box;
+  transform-origin: 72px 150px;
+  animation: mascot-wave 0.45s ease-in-out 0.6s 8 alternate;
+}
+.mascot:hover .mascot-arm {
+  animation: mascot-wave-again 0.45s ease-in-out infinite alternate;
+}
+.mascot-body {
+  animation: mascot-bob 2.8s ease-in-out infinite alternate;
+}
+.mascot-eyes {
+  transform-box: view-box;
+  transform-origin: 120px 118px;
+  animation: mascot-blink 4.5s ease-in-out infinite;
+}
+
+@keyframes mascot-wave {
+  from { transform: rotate(-8deg); }
+  to { transform: rotate(20deg); }
+}
+/* Same motion under a second name, so hovering restarts it. */
+@keyframes mascot-wave-again {
+  from { transform: rotate(-8deg); }
+  to { transform: rotate(20deg); }
+}
+@keyframes mascot-bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-5px); }
+}
+@keyframes mascot-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot-arm,
+  .mascot:hover .mascot-arm,
+  .mascot-body,
+  .mascot-eyes {
+    animation: none;
   }
 }

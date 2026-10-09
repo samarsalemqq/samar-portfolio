@@ -10,10 +10,11 @@ export const projects: Project[] = [
   published: true,
 
   tech: [
+    "UI/UX Design",
+    "Figma",
     "SwiftUI",
     "Localization",
     "Lottie",
-    "Figma",
   ],
 
   description:
@@ -106,9 +107,9 @@ export const projects: Project[] = [
   {
     slug: "riyadh-dictionary",
     title: "Riyadh Dictionary",
-    published: false,
+    published: true,
     category: "Mobile Application",
-    status: "TestFlight Beta",
+    status: "App Store & Google Play",
     tech: [
       "UI/UX Design",
       "Figma",
@@ -121,40 +122,39 @@ export const projects: Project[] = [
       "CocoaPods",
     ],
     description:
-      "A ground-up redesign of معجم الرياض — the King Salman Global Academy's Contemporary Arabic Lexicon of 120,000+ entries. I reimagined the experience, then built it as a cross-platform app with voice search, a native iOS Share Extension, and on-device camera lookup. Currently in TestFlight beta.",
+      "A redesign of معجم الرياض, the King Salman Global Academy's Contemporary Arabic Lexicon of 120,000+ entries, rebuilt for iOS and Android with voice search, camera lookup, and a native iOS Share Extension.",
     roleTitle: "Product Designer & React Native Developer",
     overview:
-      "Riyadh Dictionary (معجم الرياض) puts the King Salman Global Academy for Arabic Language's Contemporary Arabic Lexicon — more than 120,000 entries — in your pocket. I carried the project end to end: a complete redesign of the app, the user-experience work behind it, and then the build itself in React Native (Expo). The result is a fast, genuinely RTL-first dictionary that reaches beyond typing a word — search by voice, look one up from inside any other app through a native iOS Share Extension, or point the camera at text and objects and let on-device Core ML find the match. The app is in TestFlight beta ahead of an App Store release.",
+      "Riyadh Dictionary (معجم الرياض) is the mobile app for the King Salman Global Academy for Arabic Language's Contemporary Arabic Lexicon, more than 120,000 entries. I redesigned the existing app and developed new features for it, then built the redesigned version for iOS and Android in React Native, Expo, and TypeScript. Beyond typing a word, you can search by voice, point the camera at text or an object and let on-device Core ML find the match, or look a word up from inside another app through a native iOS Share Extension. The app is available on the App Store and Google Play.",
     problem:
       "The dictionary held a world-class Arabic dataset, but the mobile experience didn't do it justice: navigation felt heavy, entries were hard to scan, and every lookup meant stopping to type. A large, standards-based lexicon deserved an interface as considered as its content.",
     solution:
       "I rebuilt the product from the ground up — redesigning every core screen around how people actually search, then implementing it on a clean, layered React Native architecture. Word entries were restructured for fast scanning, Arabic and right-to-left typography were treated as a first-class concern, and three quicker ways in — voice, Share Extension, and camera recognition — were layered on so the dictionary meets users where they already are.",
     role:
-      "I owned the project end to end. I led the redesign and the UX — reworking the information architecture, navigation, and every core screen — then built the app in React Native (Expo) with TypeScript: a layered architecture (API services, response mappers, reusable hooks, screens and components) against the Riyadh Contemporary Arabic Lexicon API, plus the native iOS work — the Share Extension and the on-device Core ML image and camera recognition flow, wired through CocoaPods.",
+      "I worked across the redesign and the build. On the design side, I reworked the information architecture, navigation, and core screens into an Arabic-first, right-to-left interface. On the build side, I developed the app in React Native, Expo, and TypeScript, integrated the Riyadh Contemporary Arabic Lexicon REST API, and organized the code into reusable components, hooks, and API services. I also integrated the native iOS pieces: the Share Extension and the Core ML camera recognition.",
     features: [
-      "Redesigned, RTL-first interface built around how people search",
-      "Instant search across 120,000+ contemporary Arabic entries",
-      "Restructured word entries — meanings, examples, synonyms and antonyms — tuned for fast scanning",
-      "Browse by letter and filter by word type",
+      "Redesigned Arabic-first interface with right-to-left navigation",
+      "Word details: meanings, examples, synonyms, antonyms, and word type",
       "Arabic voice search",
-      "Native iOS Share Extension — look up a word from any other app",
-      "Camera lookup with on-device Core ML text and object recognition",
+      "Browse by letter and filter by word type",
+      "Favorites for saved words",
+      "Native iOS Share Extension: look up a word from any other app",
+      "Camera lookup with on-device Core ML",
     ],
     challenges:
-      "Redesigning for Arabic meant making right-to-left layout, diacritics, and dense linguistic entries feel effortless rather than cramped. On the build side, the work was keeping a clean separation between the API layer and the UI as features grew, and bridging native iOS capabilities — Share Extension and Core ML — into an Expo project without compromising the design.",
+      "Designing for Arabic meant giving typography, diacritics, right-to-left navigation, and dense linguistic entries careful attention, so that information stays easy to scan. On the build side, the Share Extension and camera recognition required working with native iOS code alongside an Expo-based React Native app. And as features grew, keeping API services, response mapping, hooks, screens, and components organized kept data handling clearly separate from the interface.",
     learnings:
-      "Carrying one product from redesign through UX to a working beta sharpened how I move between the two — designing with the platform's constraints in mind, and building with the intent of the design intact. I also went deep on RTL-first mobile design, layered React Native architecture, and integrating native iOS features into an Expo app.",
+      "Taking an existing product through a redesign to a release on both stores taught me to design with the platform's constraints in mind, and to build with the intent of the design intact. I also went deeper on Arabic-first mobile design, structured React Native architecture, and bringing native iOS features into an Expo app.",
     cover: "/images/projects/riyadh-dictionary-cover.png",
     gallery: [
       "/images/projects/riyadh-dictionary-1.png",
       "/images/projects/riyadh-dictionary-2.png",
       "/images/projects/riyadh-dictionary-3.png",
     ],
-    // Repo is private and the app is still in TestFlight (no public App Store
-    // page yet), so both links are "#" and the buttons stay hidden.
+    // Repo is private, so github stays "#".
     links: {
       github: "#",
-      live: "#",
+      live: "https://apps.apple.com/sa/app/%D9%85%D8%B9%D8%AC%D9%85-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6/id6464643339",
     },
     featured: true,
   },
@@ -202,7 +202,7 @@ export const projects: Project[] = [
   {
  slug: "stepaware",
 title: "StepAware",
-published: false,
+published: true,
 category: "IoT & Embedded Systems",
 status: "Graduation Project",
 
@@ -214,16 +214,16 @@ tech: [
 ],
 
 description:
-  "A smart wearable bracelet designed to improve safe navigation and emergency response for people with visual impairments.",
+  "A smart wearable bracelet designed to improve safe navigation and emergency response for blind people.",
 
 roleTitle:
-  "Software & Embedded Systems Developer",
+  "Hardware & Software Developer",
 
 overview:
-  "StepAware is a smart wearable bracelet developed as my graduation project to support people with visual impairments in navigating their surroundings more safely. The system combines ultrasonic sensors for obstacle detection with GPS tracking and Telegram integration, allowing emergency contacts to receive the user's live location when assistance is needed.",
+  "StepAware is a smart wearable bracelet developed as my graduation project to support blind people in navigating their surroundings more safely. The system combines ultrasonic sensors for obstacle detection with GPS tracking and Telegram integration, allowing emergency contacts to receive the user's live location when assistance is needed.",
 
 problem:
-  "People with visual impairments can face difficulties detecting nearby obstacles and quickly sharing their location during emergency situations, limiting their independence and delaying assistance.",
+  "Blind people can face difficulties detecting nearby obstacles and quickly sharing their location during emergency situations, limiting their independence and delaying assistance.",
 
 solution:
   "StepAware combines obstacle detection, GPS tracking, and emergency communication in a wearable device. The bracelet detects nearby obstacles, alerts the user instantly, and sends the current location to trusted contacts through a Telegram bot when emergency assistance is required.",

@@ -5,6 +5,8 @@ interface TimelineCardProps {
   /** Optional tech chips shown under the description (e.g. React Native, Expo). */
   tech?: string[];
   isLast?: boolean;
+  /** The job you hold now: its dot on the timeline pulses. */
+  current?: boolean;
 }
 
 // Reusable card used for every entry in the Experience timeline.
@@ -14,12 +16,23 @@ export default function TimelineCard({
   description,
   tech,
   isLast = false,
+  current = false,
 }: TimelineCardProps) {
   return (
     <div className="relative flex gap-6">
       {/* Timeline rail */}
       <div className="flex flex-col items-center">
-        <span className="mt-1.5 h-3 w-3 shrink-0 rounded-full bg-accent shadow-[0_0_0_4px_rgba(139,92,246,0.15)]" />
+        <span className="relative mt-1.5 flex h-3 w-3 shrink-0">
+          {/* Pulsing ring, only on the current job. Hidden for people who
+              ask their device for reduced motion. */}
+          {current ? (
+            <span
+              aria-hidden="true"
+              className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:hidden"
+            />
+          ) : null}
+          <span className="relative h-3 w-3 rounded-full bg-accent shadow-[0_0_0_4px_rgba(217,164,65,0.15)]" />
+        </span>
         {!isLast && <span className="mt-2 w-px flex-1 bg-charcoal-border" />}
       </div>
 

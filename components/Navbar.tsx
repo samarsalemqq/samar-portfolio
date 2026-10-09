@@ -38,7 +38,7 @@ const sectionIds = siteConfig.nav.map((item) => item.href.replace("/#", ""));
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeId, setActiveId] = useState("home");
+  const [activeId, setActiveId] = useState("");
 
   // Add a subtle background/border once the user scrolls past the hero.
   useEffect(() => {
@@ -191,6 +191,7 @@ export default function Navbar() {
             <IconButton href={siteConfig.github} label="GitHub profile" icon={Github} />
             <IconButton href={siteConfig.linkedin} label="LinkedIn profile" icon={Linkedin} />
             <IconButton href={`mailto:${siteConfig.email}`} label="Send an email" icon={Mail} />
+            
           </div>
 
           <a

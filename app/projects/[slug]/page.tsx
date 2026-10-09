@@ -50,12 +50,6 @@ export default function ProjectPage({
     notFound();
   }
 
-  const heroImage =
-    project.overviewImage ?? project.cover;
-
-  const roleImage =
-    project.roleImage ?? project.cover;
-
   const hasGithubLink =
     Boolean(project.links.github) &&
     project.links.github !== "#";
@@ -79,42 +73,30 @@ export default function ProjectPage({
           Back to projects
         </Link>
 
-        <header className="mt-8 max-w-3xl">
-          <p className="text-sm font-medium uppercase tracking-widest text-accent-light">
-            {project.category}
-          </p>
+        {/* Title on the left, store / code buttons on the right side */}
+        <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <header className="max-w-3xl">
+            <p className="text-sm font-medium uppercase tracking-widest text-accent-light">
+              {project.category}
+            </p>
 
-          <h1 className="mt-3 text-balance text-4xl font-semibold tracking-tight text-white sm:text-6xl">
-            {project.title}
-          </h1>
+            <h1 className="mt-3 text-balance text-4xl font-semibold tracking-tight text-white sm:text-6xl">
+              {project.title}
+            </h1>
 
-          <span className="mt-5 inline-block rounded-full border border-charcoal-border px-3 py-1 text-xs text-gray-400">
-            {project.status}
-          </span>
-        </header>
+            <span className="mt-5 inline-block rounded-full border border-charcoal-border px-3 py-1 text-xs text-gray-400">
+              {project.status}
+            </span>
+          </header>
 
-        {/* Main project image */}
-        <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-3xl border border-charcoal-border bg-charcoal-light">
-          <Image
-            src={heroImage}
-            alt={`${project.title} project presentation`}
-            fill
-            priority
-            sizes="(min-width: 1024px) 960px, 100vw"
-            className="object-cover"
-          />
-        </div>
-
-        {/* Actions and technology stack */}
-        <div className="mt-7 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           {(hasGithubLink || hasLiveLink) && (
-            <div className="flex flex-wrap gap-3">
+            <div className="flex shrink-0 flex-wrap gap-3">
               {hasGithubLink && (
                 <a
                   href={project.links.github}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex items-center gap-2 rounded-full border border-charcoal-border bg-charcoal-light px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-accent/50 hover:bg-charcoal-lighter"
+                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-charcoal-border bg-charcoal-light px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-accent/50 hover:bg-charcoal-lighter"
                 >
                   <Github
                     size={16}
@@ -129,7 +111,7 @@ export default function ProjectPage({
                   href={project.links.live}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-dark"
+                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-charcoal transition-colors hover:bg-accent-dark"
                 >
                   <ExternalLink
                     size={16}
@@ -140,16 +122,17 @@ export default function ProjectPage({
               )}
             </div>
           )}
+        </div>
 
-          <div className="flex flex-wrap gap-2">
-            {project.tech.map((tech) => (
-              <TechBadge
-                key={tech}
-                name={tech}
-                size="md"
-              />
-            ))}
-          </div>
+        {/* Technology stack */}
+        <div className="mt-7 flex flex-wrap gap-2">
+          {project.tech.map((tech) => (
+            <TechBadge
+              key={tech}
+              name={tech}
+              size="md"
+            />
+          ))}
         </div>
       </div>
 
@@ -168,30 +151,18 @@ export default function ProjectPage({
 
     
         {/* My role */}
-        <section className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-3xl border border-charcoal-border bg-charcoal-light">
-            <Image
-              src={roleImage}
-              alt={`${project.title} architecture and implementation`}
-              fill
-              sizes="(min-width: 1024px) 480px, 100vw"
-              className="object-contain p-3"
-            />
-          </div>
+        <section className="max-w-3xl">
+          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+            My Role
+          </h2>
 
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              My Role
-            </h2>
+          <p className="mt-2 text-sm font-medium text-accent-light">
+            {project.roleTitle}
+          </p>
 
-            <p className="mt-2 text-sm font-medium text-accent-light">
-              {project.roleTitle}
-            </p>
-
-            <p className="mt-4 leading-relaxed text-gray-400">
-              {project.role}
-            </p>
-          </div>
+          <p className="mt-4 leading-relaxed text-gray-400">
+            {project.role}
+          </p>
         </section>
 
         {/* Key features */}
@@ -240,7 +211,7 @@ export default function ProjectPage({
         {project.gallery.length > 0 && (
           <section>
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              Gallery
+              Screenshots
             </h2>
 
             <div className="mt-8 flex flex-wrap justify-center gap-8">

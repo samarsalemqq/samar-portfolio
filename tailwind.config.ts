@@ -8,18 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        // Dark charcoal palette (not pure black) + one accent color
+        colors: {
+        // Desert night: deep navy (not black) + one sand-gold accent
         charcoal: {
-          DEFAULT: "#111214",
-          light: "#17181b",
-          lighter: "#1e2023",
-          border: "#2a2c30",
+          DEFAULT: "#0d1320",
+          light: "#131a2a",
+          lighter: "#1a2336",
+          border: "#27324a",
         },
         accent: {
-          DEFAULT: "#8b5cf6", // violet-500
-          light: "#a78bfa",
-          dark: "#7c3aed",
+          DEFAULT: "#d9a441", // sand gold
+          light: "#e8c27a",
+          dark: "#b9862c",
         },
       },
       fontFamily: {
