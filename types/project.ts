@@ -10,6 +10,7 @@ export interface Project {
   slug: string;
   title: string;
   category: string;
+  icon?: string;
   published: boolean;
 
   overviewImage?: string;

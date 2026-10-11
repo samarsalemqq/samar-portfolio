@@ -6,11 +6,11 @@ import TimelineCard from "@/components/TimelineCard";
 const experience = [
   {
     company: "King Salman Global Academy for Arabic Language",
-    role: "Software Engineer",
+    role: "Mobile Application Developer",
     description:
-      "Building mobile applications with API integration, WebView-based games, and TestFlight/Android deployment.",
-    tech: ["React Native", "Expo", "REST APIs", "TestFlight"],
-    current: true,
+      "Designed and built the Riyadh Dictionary app, from the UI redesign in Figma to its App Store release. Developed cross-platform apps in React Native and TypeScript, integrated REST APIs and Firebase, and shipped builds through TestFlight and App Store Connect.",
+    tech: ["React Native", "TypeScript", "Expo", "REST APIs", "Firebase", "Figma", "App Store"],
+    current: false,
   },
     {
     company: "Saudi Electricity Company",

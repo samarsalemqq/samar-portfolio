@@ -4,6 +4,7 @@ import { Project } from "@/types/project";
 export const projects: Project[] = [
  {
   slug: "suhail",
+  icon: "/images/projects/icons/suhail-icon.png",
   title: "Suhail",
   category: "iOS Application",
   status: "Featured Project",
@@ -106,6 +107,7 @@ export const projects: Project[] = [
   },
   {
     slug: "riyadh-dictionary",
+    icon: "/images/projects/icons/riyadh-dictionary-icon.png",
     title: "Riyadh Dictionary",
     published: true,
     category: "Mobile Application",
@@ -201,6 +203,7 @@ export const projects: Project[] = [
   },
   {
  slug: "stepaware",
+ icon: "/images/projects/icons/stepaware-icon.png",
 title: "StepAware",
 published: true,
 category: "IoT & Embedded Systems",

@@ -80,9 +80,20 @@ export default function ProjectPage({
               {project.category}
             </p>
 
-            <h1 className="mt-3 text-balance text-4xl font-semibold tracking-tight text-white sm:text-6xl">
-              {project.title}
-            </h1>
+            <div className="mt-3 flex items-center gap-4 sm:gap-5">
+              {project.icon ? (
+                <Image
+                  src={project.icon}
+                  alt=""
+                  width={80}
+                  height={80}
+                  className="h-14 w-14 shrink-0 rounded-[22%] sm:h-20 sm:w-20"
+                />
+              ) : null}
+              <h1 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-6xl">
+                {project.title}
+              </h1>
+            </div>
 
             <span className="mt-5 inline-block rounded-full border border-charcoal-border px-3 py-1 text-xs text-gray-400">
               {project.status}

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   Github,
@@ -55,7 +56,21 @@ export default function ProjectCard({ project }: { project: Project }) {
           </span>
         </div>
 
-        <Link href={`/projects/${project.slug}`} className="mt-5 w-fit">
+        {/* App icon (when the project has one) beside the name, like an
+            App Store listing. */}
+        <Link
+          href={`/projects/${project.slug}`}
+          className="mt-5 flex w-fit items-center gap-4"
+        >
+          {project.icon ? (
+            <Image
+              src={project.icon}
+              alt=""
+              width={56}
+              height={56}
+              className="h-14 w-14 shrink-0 rounded-[22%] sm:h-16 sm:w-16"
+            />
+          ) : null}
           <h3 className="text-3xl font-semibold tracking-tight text-white transition-colors group-hover:text-accent-light sm:text-4xl">
             {project.title}
           </h3>
