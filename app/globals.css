@@ -98,3 +98,45 @@ section[id] {
     animation: none;
   }
 }
+
+/* Tech phone (components/TechPhone.tsx): floating tiles, a gently
+   bobbing phone and a faint grid behind them. */
+.tech-grid {
+  background-image:
+    linear-gradient(rgba(39, 50, 74, 0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(39, 50, 74, 0.55) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 72%);
+  mask-image: radial-gradient(circle at center, black 30%, transparent 72%);
+}
+.tech-tile {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18%;
+  aspect-ratio: 1;
+  border-radius: 22%;
+  border: 1px solid #27324a;
+  background: rgba(19, 26, 42, 0.9);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  animation: tech-float 4.8s ease-in-out infinite alternate;
+}
+.tech-phone-body {
+  animation: tech-bob 5.5s ease-in-out infinite alternate;
+}
+@keyframes tech-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+@keyframes tech-bob {
+  from { transform: translate(-50%, -50%); }
+  to { transform: translate(-50%, calc(-50% - 6px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tech-tile,
+  .tech-phone-body {
+    animation: none;
+  }
+}

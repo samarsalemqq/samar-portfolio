@@ -124,10 +124,10 @@ export const projects: Project[] = [
       "CocoaPods",
     ],
     description:
-      "A redesign of معجم الرياض, the King Salman Global Academy's Contemporary Arabic Lexicon of 120,000+ entries, rebuilt in React Native with voice search, camera lookup, and a native iOS Share Extension.",
+      "A redesign of the King Salman Global Academy's Contemporary Arabic Lexicon of 120,000+ entries, rebuilt in React Native with voice search, camera lookup, and a native iOS Share Extension.",
     roleTitle: "React Native Developer & UI/UX Designer",
     overview:
-      "Riyadh Dictionary (معجم الرياض) is the mobile app for the King Salman Global Academy for Arabic Language's Contemporary Arabic Lexicon, more than 120,000 entries. I redesigned the existing app and developed new features for it, then built the redesigned version in React Native, Expo, and TypeScript. Beyond typing a word, you can search by voice, point the camera at text or an object and let on-device Core ML find the match, or look a word up from inside another app through a native iOS Share Extension. The app is published on the App Store.",
+      "Riyadh Dictionary is the mobile app for the King Salman Global Academy for Arabic Language's Contemporary Arabic Lexicon, more than 120,000 entries. I redesigned the existing app and developed new features for it, then built the redesigned version in React Native, Expo, and TypeScript. Beyond typing a word, you can search by voice, point the camera at text or an object and let on-device Core ML find the match, or look a word up from inside another app through a native iOS Share Extension. The app is published on the App Store.",
     problem:
       "The dictionary held a world-class Arabic dataset, but the mobile experience didn't do it justice: navigation felt heavy, entries were hard to scan, and every lookup meant stopping to type. A large, standards-based lexicon deserved an interface as considered as its content.",
     solution:

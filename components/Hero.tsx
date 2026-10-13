@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail, ArrowRight, Download } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
-import CursorGlow from "@/components/CursorGlow";
-import WavingPhone from "@/components/WavingPhone";
+import TechPhone from "@/components/TechPhone";
 
 export default function Hero() {
   return (
     <section
       id="home"
-      className="group container-site relative flex flex-col justify-center overflow-hidden py-16 lg:py-24"
+      className="group container-site relative flex flex-col justify-center overflow-hidden py-16 lg:min-h-[640px] lg:py-24"
     >
       <div
         aria-hidden="true"
@@ -18,10 +17,13 @@ export default function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-accent/5 blur-3xl"
       />
-      <CursorGlow />
 
-      {/* The waving phone: small above the text on phones, large on the right on desktop */}
-      <WavingPhone className="relative mb-6 w-24 animate-fade-up lg:absolute lg:right-12 lg:top-1/2 lg:mb-0 lg:w-64 lg:-translate-y-1/2 xl:right-24" />
+      {/* Phone illustration: centered above the text on phones, on the right on desktop */}
+      {/* The wrapper does the positioning; the fade-up animation sits on the
+          inner element so its transform can't undo the vertical centering. */}
+      <div className="mx-auto mb-8 w-64 sm:w-72 lg:absolute lg:right-6 lg:top-1/2 lg:mb-0 lg:w-80 lg:-translate-y-1/2 xl:right-16 xl:w-96">
+        <TechPhone className="w-full animate-fade-up" />
+      </div>
 
         <p className="mb-3 animate-fade-up text-lg font-medium text-accent-light sm:text-xl">
         Software Engineer
@@ -33,14 +35,6 @@ export default function Hero() {
       >
         {siteConfig.name}
       </h1>
-
-      <p
-        className="mt-6 max-w-2xl animate-fade-up text-lg leading-relaxed text-gray-400 sm:text-xl"
-        style={{ animationDelay: "160ms" }}
-      >
-        I build mobile apps for Arabic speakers, in SwiftUI and React Native.
-        My latest, Suhail, is an off-road safety app live on the App Store.
-      </p>
 
       <div
         className="mt-10 flex flex-wrap items-center gap-4 animate-fade-up"
