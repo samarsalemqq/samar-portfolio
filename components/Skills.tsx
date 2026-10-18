@@ -1,4 +1,4 @@
-import { Smartphone, Code2, Server, Database, Palette, Wrench, Sparkles } from "lucide-react";
+import { Smartphone, Code2, Server, Cloud, Palette, Wrench, Sparkles } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import TechBadge from "@/components/TechBadge";
 
@@ -15,14 +15,14 @@ const skillGroups = [
     skills: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
   },
   {
-    title: "Backend & APIs",
+    title: "Backend & Databases",
     icon: Server,
-    skills: ["REST APIs", "Firebase", "JSON"],
+    skills: ["REST APIs", "Firebase", "Firebase Firestore", "SQL", "JSON"],
   },
   {
-    title: "Databases",
-    icon: Database,
-    skills: ["SQL", "Firebase Firestore"],
+    title: "Cloud (AWS)",
+    icon: Cloud,
+    skills: ["AWS Lambda", "Amazon S3", "DynamoDB", "IAM"],
   },
   {
     title: "UI/UX",

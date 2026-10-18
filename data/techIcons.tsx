@@ -38,6 +38,9 @@ import {
   Share2,
   ScanLine,
   Palette,
+  Zap,
+  HardDrive,
+  KeyRound,
 } from "lucide-react";
 
 
@@ -71,6 +74,12 @@ export const techIcons: Record<string, IconType> = {
   // Databases
   SQL: Database,
   "Firebase Firestore": SiFirebase,
+
+  // Cloud (AWS)
+  "AWS Lambda": Zap,
+  "Amazon S3": HardDrive,
+  DynamoDB: Database,
+  IAM: KeyRound,
 
   // UI/UX
   Figma: SiFigma,
