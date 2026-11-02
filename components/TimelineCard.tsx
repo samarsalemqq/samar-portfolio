@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 export interface TimelineRole {
   role: string;
   /** Optional date range, e.g. "Jun 2026 – Present". */
@@ -14,6 +16,8 @@ interface TimelineCardProps {
   isLast?: boolean;
   /** The job you hold now: its dot on the timeline pulses. */
   current?: boolean;
+  /** Position in the timeline, used to stagger the entrance. */
+  index?: number;
 }
 
 // Reusable card used for every entry in the Experience timeline.
@@ -24,11 +28,19 @@ export default function TimelineCard({
   roles,
   isLast = false,
   current = false,
+  index = 0,
 }: TimelineCardProps) {
   const isMultiRole = roles.length > 1;
 
   return (
-    <div className="relative flex gap-6">
+    // Rises in on scroll; its stretch of the rail fills with gold as the
+    // card scrolls past.
+    <div
+      data-reveal
+      data-scrub
+      className="relative flex gap-6"
+      style={{ "--d": `${index * 120}ms` } as CSSProperties}
+    >
       {/* Timeline rail */}
       <div className="flex flex-col items-center">
         <span className="relative mt-1.5 flex h-3 w-3 shrink-0">
@@ -42,10 +54,20 @@ export default function TimelineCard({
           ) : null}
           <span className="relative h-3 w-3 rounded-full bg-accent shadow-[0_0_0_4px_rgba(217,164,65,0.15)]" />
         </span>
-        {!isLast && <span className="mt-2 w-px flex-1 bg-charcoal-border" />}
+        {!isLast && (
+          <span className="relative mt-2 w-px flex-1 bg-charcoal-border">
+            <span
+              aria-hidden="true"
+              className="rail-fill absolute inset-0 bg-gradient-to-b from-accent to-accent/30"
+            />
+          </span>
+        )}
       </div>
 
-      <div className="mb-10 flex-1 rounded-2xl border border-charcoal-border bg-charcoal-light p-6 transition-colors hover:border-accent/40 sm:p-7">
+      <div
+        data-spot
+        className="spot mb-10 flex-1 rounded-2xl border border-charcoal-border bg-charcoal-light p-6 transition-colors hover:border-accent/40 sm:p-7"
+      >
         <h3 className="text-lg font-semibold text-white">{company}</h3>
 
         <div className={isMultiRole ? "mt-4 space-y-6" : ""}>

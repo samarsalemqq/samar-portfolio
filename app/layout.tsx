@@ -43,8 +43,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // The homepage sets data-motion on <html> before hydration.
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-charcoal font-sans antialiased">
         <Navbar />
         <main>{children}</main>
