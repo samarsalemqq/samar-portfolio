@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X, Download, Github, Linkedin, Mail } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
@@ -40,11 +40,20 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeId, setActiveId] = useState("");
 
-  // Add a subtle background/border once the user scrolls past the hero.
+  // Add a subtle background/border once the user scrolls past the hero, and
+  // keep the reading-progress line under the bar in step with the page.
+  const progressRef = useRef<HTMLSpanElement>(null);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progressRef.current?.style.setProperty(
+        "--scroll",
+        (max > 0 ? window.scrollY / max : 0).toFixed(4)
+      );
+    };
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -152,6 +161,12 @@ export default function Navbar() {
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
+
+      <span
+        ref={progressRef}
+        aria-hidden="true"
+        className="scroll-progress absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-accent-dark via-accent to-accent-light"
+      />
 
       {/* Mobile menu */}
       {isOpen ? (

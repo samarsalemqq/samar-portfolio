@@ -15,13 +15,16 @@ export default function Projects() {
         spacing="mb-8"
       />
 
-     <div className="flex flex-col gap-6">
-  {projects
-    .filter((project) => project.published)
-    .map((project) => (
-      <ProjectCard key={project.slug} project={project} />
-    ))}
-</div>
+      <div className="flex flex-col gap-6">
+        {projects
+          .filter((project) => project.published)
+          .map((project) => (
+            // The reveal sits on a wrapper so it doesn't fight the card's own transitions.
+            <div key={project.slug} data-reveal>
+              <ProjectCard project={project} />
+            </div>
+          ))}
+      </div>
     </section>
   );
 }

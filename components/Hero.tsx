@@ -1,22 +1,24 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { Github, Linkedin, Mail, ArrowRight, Download } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 import TechPhone from "@/components/TechPhone";
+import SplitText from "@/components/SplitText";
+
+const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
 export default function Hero() {
   return (
     <section
       id="home"
-      className="group container-site relative flex flex-col justify-center overflow-hidden py-16 lg:min-h-[640px] lg:py-24"
+      className="group container-site relative isolate flex flex-col justify-center py-16 lg:min-h-[640px] lg:py-24"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 right-0 h-80 w-80 rounded-full bg-accent/10 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-accent/5 blur-3xl"
-      />
+      {/* Soft glow in gold, blue and teal behind everything */}
+      <div aria-hidden="true" className="aurora">
+        <span className="aurora-blob aurora-blob--gold" />
+        <span className="aurora-blob aurora-blob--blue" />
+        <span className="aurora-blob aurora-blob--teal" />
+      </div>
 
       {/* Phone illustration: centered above the text on phones, on the right on desktop */}
       {/* The wrapper does the positioning; the fade-up animation sits on the
@@ -25,24 +27,19 @@ export default function Hero() {
         <TechPhone className="w-full animate-fade-up" />
       </div>
 
-        <p className="mb-3 animate-fade-up text-lg font-medium text-accent-light sm:text-xl">
+      <p className="rise-in mb-3 text-lg font-medium text-accent-light sm:text-xl">
         Software Engineer
       </p>
 
-      <h1
-        className="animate-fade-up text-balance text-5xl font-semibold tracking-tight text-white sm:text-7xl"
-        style={{ animationDelay: "80ms" }}
-      >
-        {siteConfig.name}
+      <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-7xl">
+        <SplitText text={siteConfig.name} by="letters" partClassName="hero-letter" />
       </h1>
 
-      <div
-        className="mt-10 flex flex-wrap items-center gap-4 animate-fade-up"
-        style={{ animationDelay: "240ms" }}
-      >
+      <div className="mt-10 flex flex-wrap items-center gap-4">
         <Link
           href="/#projects"
-          className="group/btn inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-charcoal transition-all hover:bg-accent-dark hover:shadow-lg hover:shadow-accent/20"
+          style={delay(750)}
+          className="rise-in btn-shine group/btn inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-charcoal transition-all hover:bg-accent-dark hover:shadow-lg hover:shadow-accent/20"
         >
           View My Projects
           <ArrowRight
@@ -54,23 +51,22 @@ export default function Hero() {
         <a
           href={siteConfig.cvPath}
           download
-          className="inline-flex items-center gap-2 rounded-full border border-charcoal-border bg-charcoal-light px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-accent/50 hover:bg-charcoal-lighter"
+          style={delay(830)}
+          className="rise-in inline-flex items-center gap-2 rounded-full border border-charcoal-border bg-charcoal-light px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-accent/50 hover:bg-charcoal-lighter"
         >
           <Download size={16} aria-hidden="true" />
           Download CV
         </a>
       </div>
 
-      <div
-        className="mt-10 flex items-center gap-3 animate-fade-up"
-        style={{ animationDelay: "320ms" }}
-      >
+      <div className="mt-10 flex items-center gap-3">
         <a
           href={siteConfig.github}
           target="_blank"
           rel="noreferrer noopener"
           aria-label="GitHub profile"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal-border text-gray-400 transition-colors hover:border-accent/40 hover:text-white"
+          style={delay(930)}
+          className="rise-in inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal-border text-gray-400 transition-colors hover:border-accent/40 hover:text-white"
         >
           <Github size={19} />
         </a>
@@ -79,14 +75,16 @@ export default function Hero() {
           target="_blank"
           rel="noreferrer noopener"
           aria-label="LinkedIn profile"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal-border text-gray-400 transition-colors hover:border-accent/40 hover:text-white"
+          style={delay(1000)}
+          className="rise-in inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal-border text-gray-400 transition-colors hover:border-accent/40 hover:text-white"
         >
           <Linkedin size={19} />
         </a>
         <a
           href={`mailto:${siteConfig.email}`}
           aria-label="Send an email"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal-border text-gray-400 transition-colors hover:border-accent/40 hover:text-white"
+          style={delay(1070)}
+          className="rise-in inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal-border text-gray-400 transition-colors hover:border-accent/40 hover:text-white"
         >
           <Mail size={19} />
         </a>

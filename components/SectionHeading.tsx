@@ -1,4 +1,6 @@
+import type { CSSProperties } from "react";
 import type { LucideIcon } from "lucide-react";
+import SplitText from "@/components/SplitText";
 
 interface SectionHeadingProps {
   eyebrow: string;
@@ -11,6 +13,8 @@ interface SectionHeadingProps {
 }
 
 // Reused at the top of every homepage section for a consistent, premium look.
+// As it scrolls into view the eyebrow appears, the title rises word by word,
+// then the description follows.
 export default function SectionHeading({
   eyebrow,
   title,
@@ -19,18 +23,25 @@ export default function SectionHeading({
   spacing = "mb-12",
 }: SectionHeadingProps) {
   return (
-    <div className={`${spacing} max-w-2xl animate-fade-up`}>
-      <p className="mb-3 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-accent-light">
-        {Icon ? <Icon size={14} aria-hidden="true" /> : null}
-        {eyebrow}
-      </p>
-      <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-        {title}
+    <div data-reveal="split" className={`${spacing} max-w-2xl`}>
+      <div className="split-part">
+        <p className="mb-3 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-accent-light">
+          {Icon ? <Icon size={14} aria-hidden="true" /> : null}
+          {eyebrow}
+        </p>
+      </div>
+      <h2
+        className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl"
+        style={{ "--d": "90ms" } as CSSProperties}
+      >
+        <SplitText text={title} />
       </h2>
       {description ? (
-        <p className="mt-4 text-base leading-relaxed text-gray-400">
-          {description}
-        </p>
+        <div className="split-part" style={{ "--i": 6 } as CSSProperties}>
+          <p className="mt-4 text-base leading-relaxed text-gray-400">
+            {description}
+          </p>
+        </div>
       ) : null}
     </div>
   );

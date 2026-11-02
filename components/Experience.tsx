@@ -45,7 +45,7 @@ export default function Experience() {
     <section id="experience" className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
       <SectionHeading eyebrow="Experience" title="Where I've worked" icon={Briefcase} />
 
-      <div className="max-w-2xl animate-fade-up">
+      <div className="max-w-2xl">
         {experience.map((item, index) => (
           <TimelineCard
             key={item.company}
@@ -53,6 +53,7 @@ export default function Experience() {
             roles={item.roles}
             current={item.current}
             isLast={index === experience.length - 1}
+            index={index}
           />
         ))}
       </div>

@@ -13,10 +13,15 @@ interface ProjectPageProps {
   };
 }
 
+// Only published projects get a page; any other slug is a 404.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
+  return projects
+    .filter((project) => project.published)
+    .map((project) => ({
+      slug: project.slug,
+    }));
 }
 
 export function generateMetadata({
@@ -24,7 +29,7 @@ export function generateMetadata({
 }: ProjectPageProps): Metadata {
   const project = getProjectBySlug(params.slug);
 
-  if (!project) {
+  if (!project || !project.published) {
     return {
       title: "Project not found",
     };
@@ -46,7 +51,7 @@ export default function ProjectPage({
 }: ProjectPageProps) {
   const project = getProjectBySlug(params.slug);
 
-  if (!project) {
+  if (!project || !project.published) {
     notFound();
   }
 

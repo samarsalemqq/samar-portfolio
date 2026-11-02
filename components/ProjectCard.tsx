@@ -44,7 +44,11 @@ export default function ProjectCard({ project }: { project: Project }) {
     Boolean(project.links.live) && project.links.live !== "#";
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-charcoal-border bg-charcoal-light transition-all duration-300 hover:border-accent/40 hover:shadow-2xl hover:shadow-accent/10">
+    // A gold light follows the pointer along the border.
+    <article
+      data-spot
+      className="spot group transition-[border-color,box-shadow] duration-300 flex h-full flex-col overflow-hidden rounded-3xl border border-charcoal-border bg-charcoal-light hover:border-accent/40 hover:shadow-2xl hover:shadow-accent/10"
+    >
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           <span className="text-xs font-medium uppercase tracking-wide text-accent-light">
@@ -68,7 +72,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               alt=""
               width={56}
               height={56}
-              className="h-14 w-14 shrink-0 rounded-[22%] sm:h-16 sm:w-16"
+              className="icon-hop h-14 w-14 shrink-0 rounded-[22%] sm:h-16 sm:w-16"
             />
           ) : null}
           <h3 className="text-3xl font-semibold tracking-tight text-white transition-colors group-hover:text-accent-light sm:text-4xl">
