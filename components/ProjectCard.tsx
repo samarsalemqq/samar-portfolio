@@ -1,40 +1,16 @@
-import Image from "next/image";
 import Link from "next/link";
-import {
-  Github,
-  ExternalLink,
-  ArrowUpRight,
-  Award,
-  Clock,
-  Building2,
-  GraduationCap,
-  Palette,
-  Rocket,
-  UserRound,
-} from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 import { Project } from "@/types/project";
-import TechBadge from "@/components/TechBadge";
+import ProjectIcon from "@/components/ProjectIcon";
+import { getDictionary } from "@/lib/preferences";
 
-// One icon per standard status badge, so it reads at a glance. Falls back to
-// Rocket for anything unrecognized (shouldn't happen if data/projects.ts
-// sticks to the documented set of statuses).
-const statusIcons: Record<string, typeof Award> = {
-  "Featured Project": Award,
-  "Published on App Store": Rocket,
-  "TestFlight Beta": Rocket,
-  "Professional Project": Building2,
-  "Currently Developing": Clock,
-  "Graduation Project": GraduationCap,
-  "UI/UX Case Study": Palette,
-};
+const iconLink =
+  "inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-charcoal-lighter hover:text-ink";
 
-// Project card used in the Selected Work list. Text only, no image: the
-// app's name is the largest thing on the card, and the screenshots live on
-// the project page. Each card is a full-width row with everything in one
-// column: category and status, name, description, role, technologies, then
-// the links.
+// Project card used in the Selected Projects grid: the app icon and name,
+// then what it is, then the links. Screenshots live on the project page.
 export default function ProjectCard({ project }: { project: Project }) {
-  const StatusIcon = statusIcons[project.status] ?? Rocket;
+  const t = getDictionary();
   const isCaseStudy = project.status === "UI/UX Case Study";
   // A link set to "#" in data/projects.ts means "no link" (for example a
   // private repo), so its icon is not shown at all.
@@ -44,100 +20,67 @@ export default function ProjectCard({ project }: { project: Project }) {
     Boolean(project.links.live) && project.links.live !== "#";
 
   return (
-    // A gold light follows the pointer along the border.
     <article
       data-spot
-      className="spot group transition-[border-color,box-shadow] duration-300 flex h-full flex-col overflow-hidden rounded-3xl border border-charcoal-border bg-charcoal-light hover:border-accent/40 hover:shadow-2xl hover:shadow-accent/10"
+      className="spot flex h-full flex-col rounded-3xl border border-charcoal-border bg-charcoal-light p-6 transition-colors duration-300 hover:border-accent sm:p-7"
     >
-      <div className="flex flex-1 flex-col p-6 sm:p-7">
-        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-          <span className="text-xs font-medium uppercase tracking-wide text-accent-light">
-            {project.category}
-          </span>
-          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-charcoal-border px-3 py-1 text-[11px] font-medium text-gray-400">
-            <StatusIcon size={13} aria-hidden="true" />
-            {project.status}
-          </span>
-        </div>
-
-        {/* App icon (when the project has one) beside the name, like an
-            App Store listing. */}
-        <Link
-          href={`/projects/${project.slug}`}
-          className="mt-5 flex w-fit items-center gap-4"
-        >
-          {project.icon ? (
-            <Image
-              src={project.icon}
-              alt=""
-              width={56}
-              height={56}
-              className="icon-hop h-14 w-14 shrink-0 rounded-[22%] sm:h-16 sm:w-16"
-            />
-          ) : null}
-          <h3 className="text-3xl font-semibold tracking-tight text-white transition-colors group-hover:text-accent-light sm:text-4xl">
-            {project.title}
-          </h3>
-        </Link>
-
-        {/* Fixed to 3 lines so every card takes up the same vertical space
-            here, regardless of how long the description text is. */}
-        <p className="mt-3 line-clamp-3 leading-relaxed text-gray-400">
-          {project.description}
-        </p>
-
-        <p className="mt-3 inline-flex items-center gap-1.5 text-sm text-gray-500">
-          <UserRound size={14} aria-hidden="true" />
-          {project.roleTitle}
-        </p>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          {project.tech.map((tech) => (
-            <TechBadge key={tech} name={tech} />
-          ))}
-        </div>
-
-        {/* Footer actions: GitHub / Live are real external links, and the
-            "view project" link points to the detail page. Kept as siblings
-            (not nested) since a link can't contain another link. mt-auto
-            pins this row to the bottom of the card — no divider line, just
-            the space above it. */}
-        <div className="mt-auto flex items-center justify-between pt-5">
-          <div className="flex items-center gap-1.5">
-            {hasGithubLink ? (
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label={`${project.title} GitHub repository`}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-charcoal-lighter hover:text-white"
-            >
-              <Github size={17} />
-            </a>
-            ) : null}
-            {hasLiveLink ? (
-            <a
-              href={project.links.live}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label={`${project.title} live link or App Store`}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-charcoal-lighter hover:text-white"
-            >
-              <ExternalLink size={17} />
-            </a>
-            ) : null}
+      <div className="flex flex-1 flex-col">
+        <div className="flex items-center gap-4">
+          <ProjectIcon project={project} size={136} className="h-16 w-16 shrink-0" />
+          <div>
+            <h3 className="text-2xl font-medium leading-tight text-ink">
+              <Link href={`/projects/${project.slug}`}>{project.title}</Link>
+            </h3>
+            <p className="mt-1 text-sm font-normal text-accent-light">
+              {project.roleTitle}
+            </p>
           </div>
+        </div>
 
+        <p className="mt-5 leading-relaxed text-muted">{project.description}</p>
+
+        <p className="mt-4 text-sm font-normal text-muted">
+          {t.projectStatus[project.status] ?? project.status}
+        </p>
+
+        <ul dir="ltr" className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[0.86rem] font-normal text-muted rtl:justify-end">
+          {(project.cardTech ?? project.tech).map((tech) => (
+            <li key={tech}>{tech}</li>
+          ))}
+        </ul>
+
+        <div className="mt-auto flex items-center justify-between gap-3 pt-6">
           <Link
             href={`/projects/${project.slug}`}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-300 transition-colors hover:text-accent-light"
+            className="inline-flex min-h-11 items-center rounded-full border border-charcoal-border px-5 text-sm font-medium text-ink transition-colors hover:border-accent"
           >
-            {isCaseStudy ? "View case study" : "View project"}
-            <ArrowUpRight
-              size={15}
-              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
+            {isCaseStudy ? t.projects.viewCaseStudy : t.projects.viewProject}
           </Link>
+
+          <div className="flex items-center gap-1">
+            {hasGithubLink ? (
+              <a
+                href={project.links.github}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={`${project.title}: ${t.a11y.projectGithub}`}
+                className={iconLink}
+              >
+                <Github size={18} aria-hidden="true" />
+              </a>
+            ) : null}
+            {hasLiveLink ? (
+              <a
+                href={project.links.live}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={`${project.title}: ${t.a11y.projectLive}`}
+                className={iconLink}
+              >
+                <ExternalLink size={18} aria-hidden="true" />
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
     </article>

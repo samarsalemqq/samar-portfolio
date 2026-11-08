@@ -1,5 +1,9 @@
 import type { Config } from "tailwindcss";
 
+// Colors that change between dark and light mode read from the variables
+// defined at the top of app/globals.css.
+const themed = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
+
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
@@ -8,23 +12,26 @@ const config: Config = {
   ],
   theme: {
     extend: {
-        colors: {
+      colors: {
         // Desert night: deep navy (not black) + one sand-gold accent
         charcoal: {
-          DEFAULT: "#0d1320",
-          light: "#131a2a",
-          lighter: "#1a2336",
-          border: "#27324a",
+          DEFAULT: themed("night"),
+          light: themed("surface"),
+          lighter: themed("raised"),
+          border: themed("line"),
         },
+        ink: themed("ink"),
+        soft: themed("soft"),
+        muted: themed("muted"),
         accent: {
           DEFAULT: "#d9a441", // sand gold
-          light: "#e8c27a",
+          light: themed("sand-text"),
           dark: "#b9862c",
+          ink: "#0d1320", // text sitting on the gold buttons, in both modes
         },
       },
       fontFamily: {
-     
-        sans: ["var(--font-inter, system-ui)", "system-ui", "sans-serif"],
+        sans: ["var(--font-readex, system-ui)", "system-ui", "sans-serif"],
       },
       keyframes: {
         fadeUp: {

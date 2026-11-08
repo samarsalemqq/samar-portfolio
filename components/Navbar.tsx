@@ -2,10 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, X, Download, Github, Linkedin, Mail } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Menu, X, Download, Github, Linkedin, Mail, Moon, Sun } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
+import { dictionaries, type Dictionary, type Lang, type Theme } from "@/data/i18n";
 
-// Small icon-only button shared by the desktop social row (GitHub/LinkedIn/Email).
+const navId = (href: string) => href.replace("/#", "") as keyof Dictionary["nav"];
+const sectionIds = siteConfig.nav.map((item) => navId(item.href));
+
+const toolClass =
+  "inline-flex h-11 min-w-11 items-center justify-center rounded-full px-2.5 text-sm text-muted transition-colors hover:bg-charcoal-light hover:text-ink";
+
+function saveCookie(name: string, value: string) {
+  document.cookie = `${name}=${value}; path=/; max-age=31536000; samesite=lax`;
+}
+
+// Small icon-only link used in the mobile menu's social row.
 function IconButton({
   href,
   label,
@@ -22,23 +34,41 @@ function IconButton({
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer noopener" : undefined}
       aria-label={label}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-400 transition-all duration-200 hover:scale-110 hover:bg-charcoal-light hover:text-white"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-charcoal-light hover:text-ink"
     >
-      <Icon size={18} />
+      <Icon size={18} aria-hidden="true" />
     </a>
   );
 }
 
-// Section ids the nav links point to, derived from siteConfig so this never
-// drifts out of sync with the actual nav items.
-const sectionIds = siteConfig.nav.map((item) => item.href.replace("/#", ""));
-
-// Sticky navbar with a mobile-friendly slide-down menu and a scrollspy
-// indicator that highlights whichever section is currently in view.
-export default function Navbar() {
+// Sticky navbar with a mobile-friendly slide-down menu, a scrollspy
+// indicator, and the language and theme buttons.
+export default function Navbar({
+  lang,
+  theme: initialTheme,
+}: {
+  lang: Lang;
+  theme: Theme;
+}) {
+  const t = dictionaries[lang];
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeId, setActiveId] = useState("");
+  const [theme, setTheme] = useState(initialTheme);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.dataset.theme = next;
+    saveCookie("theme", next);
+  };
+
+  // The server renders the text, so the page is refreshed in the new language.
+  const toggleLanguage = () => {
+    saveCookie("lang", lang === "en" ? "ar" : "en");
+    router.refresh();
+  };
 
   // Add a subtle background/border once the user scrolls past the hero, and
   // keep the reading-progress line under the bar in step with the page.
@@ -57,9 +87,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Track which section is currently in view so the matching nav link can
-  // light up — the small touch that makes the nav feel alive rather than
-  // just a static list of links.
+  // Track which section is currently in view so the matching nav link can light up.
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -85,41 +113,39 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-white/[0.08] bg-charcoal/70 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl"
+          ? "border-b border-charcoal-border/60 bg-charcoal/75 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <nav
-        className="relative flex items-center justify-between px-6 py-4 sm:px-8 lg:px-12"
+        className="relative flex items-center justify-between gap-4 px-6 py-3 sm:px-8 lg:px-12"
         aria-label="Primary"
       >
         <Link
           href="/#home"
-          className="group flex items-baseline gap-px text-base font-semibold tracking-tight"
-          aria-label={`${siteConfig.name}, back to top`}
+          className="text-base font-medium text-ink"
+          aria-label={`${t.name}, ${t.a11y.backToTop}`}
         >
-          <span className="text-gray-200 transition-colors group-hover:text-white">
-            {siteConfig.name}
-          </span>
-          <span className="text-accent">.</span>
+          {t.name}
         </Link>
 
         {/* Desktop links, centered in the bar, with a small underline that
             lights up for the section currently in view */}
         <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex">
           {siteConfig.nav.map((item) => {
-            const isActive = activeId === item.href.replace("/#", "");
+            const id = navId(item.href);
+            const isActive = activeId === id;
             return (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`relative py-1 text-sm font-medium transition-colors ${
-                    isActive ? "text-white" : "text-gray-400 hover:text-white"
+                  className={`relative py-1 text-sm transition-colors ${
+                    isActive ? "text-ink" : "text-muted hover:text-ink"
                   }`}
                 >
-                  {item.label}
+                  {t.nav[id]}
                   <span
-                    className={`absolute -bottom-0.5 left-0 h-px bg-accent transition-all duration-300 ${
+                    className={`absolute -bottom-0.5 start-0 h-px bg-accent transition-all duration-300 ${
                       isActive ? "w-full" : "w-0"
                     }`}
                     aria-hidden="true"
@@ -130,42 +156,46 @@ export default function Navbar() {
           })}
         </ul>
 
-        <div className="hidden items-center gap-1 lg:flex">
-          <IconButton href={siteConfig.github} label="GitHub profile" icon={Github} />
-          <IconButton href={siteConfig.linkedin} label="LinkedIn profile" icon={Linkedin} />
-          <IconButton href={`mailto:${siteConfig.email}`} label="Send an email" icon={Mail} />
-
-          <a
-            href={siteConfig.cvPath}
-            download
-            className="group/cv ml-3 inline-flex items-center gap-2 rounded-full border border-charcoal-border bg-charcoal-light px-4 py-2 text-sm font-medium text-white transition-all hover:border-accent/50 hover:bg-charcoal-lighter"
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-label={t.a11y.switchLanguage}
+            className={toolClass}
           >
-            <Download
-              size={16}
-              aria-hidden="true"
-              className="transition-transform duration-200 group-hover/cv:translate-y-0.5"
-            />
-            Download CV
-          </a>
-        </div>
+            {t.languageToggle}
+          </button>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? t.a11y.toLight : t.a11y.toDark}
+            className={toolClass}
+          >
+            {theme === "dark" ? (
+              <Sun size={19} aria-hidden="true" />
+            ) : (
+              <Moon size={19} aria-hidden="true" />
+            )}
+          </button>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-gray-300 hover:text-white lg:hidden"
-          onClick={() => setIsOpen((prev) => !prev)}
-          aria-expanded={isOpen}
-          aria-controls="mobile-menu"
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            className={`${toolClass} lg:hidden`}
+            onClick={() => setIsOpen((prev) => !prev)}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+            aria-label={isOpen ? t.a11y.closeMenu : t.a11y.openMenu}
+          >
+            {isOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+          </button>
+        </div>
       </nav>
 
       <span
         ref={progressRef}
         aria-hidden="true"
-        className="scroll-progress absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-accent-dark via-accent to-accent-light"
+        className="scroll-progress absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-accent-dark via-accent to-accent"
       />
 
       {/* Mobile menu */}
@@ -176,7 +206,8 @@ export default function Navbar() {
         >
           <ul className="flex flex-col gap-1 pt-4">
             {siteConfig.nav.map((item, index) => {
-              const isActive = activeId === item.href.replace("/#", "");
+              const id = navId(item.href);
+              const isActive = activeId === id;
               return (
                 <li
                   key={item.href}
@@ -186,16 +217,16 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     onClick={closeMenu}
-                    className={`flex items-center gap-3 rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-charcoal-light hover:text-white ${
-                      isActive ? "text-white" : "text-gray-200"
+                    className={`flex items-center gap-3 rounded-md px-3 py-3 text-base transition-colors hover:bg-charcoal-light hover:text-ink ${
+                      isActive ? "text-ink" : "text-soft"
                     }`}
                   >
                     <item.icon
                       size={18}
-                      className={isActive ? "text-accent-light" : "text-gray-500"}
+                      className={isActive ? "text-accent-light" : "text-muted"}
                       aria-hidden="true"
                     />
-                    {item.label}
+                    {t.nav[id]}
                   </Link>
                 </li>
               );
@@ -203,20 +234,19 @@ export default function Navbar() {
           </ul>
 
           <div className="mt-4 flex items-center gap-2">
-            <IconButton href={siteConfig.github} label="GitHub profile" icon={Github} />
-            <IconButton href={siteConfig.linkedin} label="LinkedIn profile" icon={Linkedin} />
-            <IconButton href={`mailto:${siteConfig.email}`} label="Send an email" icon={Mail} />
-            
+            <IconButton href={siteConfig.github} label={t.a11y.github} icon={Github} />
+            <IconButton href={siteConfig.linkedin} label={t.a11y.linkedin} icon={Linkedin} />
+            <IconButton href={`mailto:${siteConfig.email}`} label={t.a11y.email} icon={Mail} />
           </div>
 
           <a
             href={siteConfig.cvPath}
             download
             onClick={closeMenu}
-            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-charcoal-border bg-charcoal-light px-4 py-3 text-sm font-medium text-white"
+            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-charcoal-border bg-charcoal-light px-4 py-3 text-sm font-medium text-ink"
           >
             <Download size={16} aria-hidden="true" />
-            Download CV
+            {t.hero.downloadCv}
           </a>
         </div>
       ) : null}
