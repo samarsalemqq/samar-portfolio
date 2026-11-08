@@ -4,8 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 
+import ProjectIcon from "@/components/ProjectIcon";
 import TechBadge from "@/components/TechBadge";
 import { getProjectBySlug, projects } from "@/data/projects";
+import { localizeProject } from "@/data/projects.ar";
+import { getDictionary, getLang } from "@/lib/preferences";
 
 interface ProjectPageProps {
   params: {
@@ -27,13 +30,15 @@ export function generateStaticParams() {
 export function generateMetadata({
   params,
 }: ProjectPageProps): Metadata {
-  const project = getProjectBySlug(params.slug);
+  const found = getProjectBySlug(params.slug);
 
-  if (!project || !project.published) {
+  if (!found || !found.published) {
     return {
-      title: "Project not found",
+      title: getDictionary().projectPage.notFound,
     };
   }
+
+  const project = localizeProject(found, getLang());
 
   return {
     title: project.title,
@@ -49,11 +54,15 @@ export function generateMetadata({
 export default function ProjectPage({
   params,
 }: ProjectPageProps) {
-  const project = getProjectBySlug(params.slug);
+  const found = getProjectBySlug(params.slug);
 
-  if (!project || !project.published) {
+  if (!found || !found.published) {
     notFound();
   }
+
+  const t = getDictionary();
+  const copy = t.projectPage;
+  const project = localizeProject(found, getLang());
 
   const hasGithubLink =
     Boolean(project.links.github) &&
@@ -69,39 +78,36 @@ export default function ProjectPage({
       <div className="mx-auto max-w-5xl px-6 pt-10">
         <Link
           href="/#projects"
-          className="inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition-colors hover:text-white"
+          className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-ink"
         >
           <ArrowLeft
             size={16}
             aria-hidden="true"
+            className="rtl:rotate-180"
           />
-          Back to projects
+          {copy.back}
         </Link>
 
         {/* Title on the left, store / code buttons on the right side */}
         <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <header className="max-w-3xl">
-            <p className="text-sm font-medium uppercase tracking-widest text-accent-light">
+            <p className="text-sm font-medium text-accent-light">
               {project.category}
             </p>
 
             <div className="mt-3 flex items-center gap-4 sm:gap-5">
-              {project.icon ? (
-                <Image
-                  src={project.icon}
-                  alt=""
-                  width={80}
-                  height={80}
-                  className="h-14 w-14 shrink-0 rounded-[22%] sm:h-20 sm:w-20"
-                />
-              ) : null}
-              <h1 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-6xl">
+              <ProjectIcon
+                project={project}
+                size={160}
+                className="h-14 w-14 shrink-0 sm:h-20 sm:w-20"
+              />
+              <h1 className="text-balance text-4xl font-medium tracking-tight text-ink sm:text-5xl">
                 {project.title}
               </h1>
             </div>
 
-            <span className="mt-5 inline-block rounded-full border border-charcoal-border px-3 py-1 text-xs text-gray-400">
-              {project.status}
+            <span className="mt-5 inline-block rounded-full border border-charcoal-border px-3 py-1 text-xs text-muted">
+              {project.pageStatus ?? t.projectStatus[project.status] ?? project.status}
             </span>
           </header>
 
@@ -112,13 +118,13 @@ export default function ProjectPage({
                   href={project.links.github}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-charcoal-border bg-charcoal-light px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-accent/50 hover:bg-charcoal-lighter"
+                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-charcoal-border bg-charcoal-light px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent/50 hover:bg-charcoal-lighter"
                 >
                   <Github
                     size={16}
                     aria-hidden="true"
                   />
-                  View Code
+                  {copy.viewCode}
                 </a>
               )}
 
@@ -127,7 +133,7 @@ export default function ProjectPage({
                   href={project.links.live}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-charcoal transition-colors hover:bg-accent-dark"
+                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-ink transition-colors hover:bg-accent-dark"
                 >
                   <ExternalLink
                     size={16}
@@ -141,7 +147,7 @@ export default function ProjectPage({
         </div>
 
         {/* Technology stack */}
-        <div className="mt-7 flex flex-wrap gap-2">
+        <div dir="ltr" className="mt-7 flex flex-wrap gap-2 rtl:justify-end">
           {project.tech.map((tech) => (
             <TechBadge
               key={tech}
@@ -156,11 +162,11 @@ export default function ProjectPage({
       <div className="mx-auto mt-16 max-w-5xl space-y-20 px-6 sm:mt-20 sm:space-y-24">
         {/* Overview */}
         <section className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-            Overview
+          <h2 className="text-2xl font-medium tracking-tight text-ink sm:text-3xl">
+            {copy.overview}
           </h2>
 
-          <p className="mt-4 leading-relaxed text-gray-400">
+          <p className="mt-4 leading-relaxed text-muted">
             {project.overview}
           </p>
         </section>
@@ -168,30 +174,43 @@ export default function ProjectPage({
     
         {/* My role */}
         <section className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-            My Role
+          <h2 className="text-2xl font-medium tracking-tight text-ink sm:text-3xl">
+            {copy.myRole}
           </h2>
 
           <p className="mt-2 text-sm font-medium text-accent-light">
             {project.roleTitle}
           </p>
 
-          <p className="mt-4 leading-relaxed text-gray-400">
-            {project.role}
-          </p>
+          {project.role ? (
+            <p className="mt-4 leading-relaxed text-muted">
+              {project.role}
+            </p>
+          ) : null}
+
+          {project.responsibilities ? (
+            <ul className="mt-4 space-y-3 leading-relaxed text-muted">
+              {project.responsibilities.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </section>
 
         {/* Key features */}
         <section>
-          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-            Key Features
+          <h2 className="text-2xl font-medium tracking-tight text-ink sm:text-3xl">
+            {copy.keyFeatures}
           </h2>
 
           <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {project.features.map((feature) => (
               <li
                 key={feature}
-                className="flex items-start gap-3 rounded-2xl border border-charcoal-border bg-charcoal-light p-4 leading-relaxed text-gray-300"
+                className="flex items-start gap-3 rounded-2xl border border-charcoal-border bg-charcoal-light p-4 leading-relaxed text-soft"
               >
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                 {feature}
@@ -203,21 +222,21 @@ export default function ProjectPage({
         {/* Challenges and learnings */}
         <section className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-14">
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              Challenges
+            <h2 className="text-2xl font-medium tracking-tight text-ink sm:text-3xl">
+              {copy.challenges}
             </h2>
 
-            <p className="mt-4 leading-relaxed text-gray-400">
+            <p className="mt-4 leading-relaxed text-muted">
               {project.challenges}
             </p>
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              What I Learned
+            <h2 className="text-2xl font-medium tracking-tight text-ink sm:text-3xl">
+              {copy.learnings}
             </h2>
 
-            <p className="mt-4 leading-relaxed text-gray-400">
+            <p className="mt-4 leading-relaxed text-muted">
               {project.learnings}
             </p>
           </div>
@@ -226,8 +245,8 @@ export default function ProjectPage({
         {/* Gallery */}
         {project.gallery.length > 0 && (
           <section>
-            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              Screenshots
+            <h2 className="text-2xl font-medium tracking-tight text-ink sm:text-3xl">
+              {copy.screenshots}
             </h2>
 
             <div className="mt-8 flex flex-wrap justify-center gap-8">
@@ -239,7 +258,7 @@ export default function ProjectPage({
                   >
                     <Image
                       src={src}
-                      alt={`${project.title} screenshot ${index + 1}`}
+                      alt={`${project.title} ${copy.screenshotAlt} ${index + 1}`}
                       fill
                       sizes="280px"
                       className="object-cover"

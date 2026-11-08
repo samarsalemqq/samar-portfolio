@@ -26,7 +26,7 @@ export default function ProfessionalPrograms() {
       id="professional-programs"
       className="mx-auto max-w-6xl px-6 py-20 sm:py-24"
     >
-      <SectionHeading eyebrow="Programs" title="Professional Programs" icon={Award} />
+      <SectionHeading title="Professional Programs" />
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {programs.map(({ institution, program, duration, icon: Icon }, index) => (

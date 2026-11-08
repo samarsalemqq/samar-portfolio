@@ -12,7 +12,7 @@ const degrees = [
 export default function Education() {
   return (
     <section id="education" className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
-      <SectionHeading eyebrow="Education" title="Education" icon={GraduationCap} />
+      <SectionHeading title="Education" />
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {degrees.map(({ institution, program }, index) => (

@@ -15,7 +15,7 @@ export default function TechBadge({ name, size = "sm" }: TechBadgeProps) {
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border border-charcoal-border bg-charcoal-lighter text-gray-300 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:text-accent-light ${
+      className={`inline-flex items-center gap-1.5 rounded-full border border-charcoal-border bg-charcoal-lighter text-soft ${
         isMd ? "px-3.5 py-2 text-sm" : "px-3 py-1.5 text-xs"
       }`}
     >

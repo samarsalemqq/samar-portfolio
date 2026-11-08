@@ -17,11 +17,11 @@ export const siteConfig = {
   cvPath: "/cv/Samar Salem Alqahtani-CV.pdf",
 
    nav: [
-    { label: "Home", href: "/#home", icon: Home },
-    { label: "Projects", href: "/#projects", icon: FolderKanban },
-    { label: "Experience", href: "/#experience", icon: Briefcase },
-    { label: "About", href: "/#about", icon: User },
-    { label: "Skills", href: "/#skills", icon: Sparkles },
-    { label: "Contact", href: "/#contact", icon: Mail },
+    { href: "/#home", icon: Home },
+    { href: "/#projects", icon: FolderKanban },
+    { href: "/#experience", icon: Briefcase },
+    { href: "/#about", icon: User },
+    { href: "/#skills", icon: Sparkles },
+    { href: "/#contact", icon: Mail },
   ],
 };

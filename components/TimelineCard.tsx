@@ -68,7 +68,7 @@ export default function TimelineCard({
         data-spot
         className="spot mb-10 flex-1 rounded-2xl border border-charcoal-border bg-charcoal-light p-6 transition-colors hover:border-accent/40 sm:p-7"
       >
-        <h3 className="text-lg font-semibold text-white">{company}</h3>
+        <h3 className="text-lg font-medium text-ink">{company}</h3>
 
         <div className={isMultiRole ? "mt-4 space-y-6" : ""}>
           {roles.map((item, index) => (
@@ -76,14 +76,14 @@ export default function TimelineCard({
               key={`${item.role}-${item.period ?? index}`}
               className={
                 isMultiRole
-                  ? "relative border-l border-charcoal-border pl-5"
+                  ? "relative border-s border-charcoal-border ps-5"
                   : ""
               }
             >
               {isMultiRole ? (
                 <span
                   aria-hidden="true"
-                  className={`absolute -left-[4.5px] top-1.5 h-2 w-2 rounded-full ${
+                  className={`absolute -start-[4.5px] top-1.5 h-2 w-2 rounded-full ${
                     index === 0 ? "bg-accent" : "bg-charcoal-border"
                   }`}
                 />
@@ -96,9 +96,9 @@ export default function TimelineCard({
                 {item.role}
               </p>
               {item.period ? (
-                <p className="mt-0.5 text-xs text-gray-500">{item.period}</p>
+                <p className="mt-0.5 text-xs text-muted">{item.period}</p>
               ) : null}
-              <p className="mt-3 text-sm leading-relaxed text-gray-400">
+              <p className="mt-3 text-sm leading-relaxed text-muted">
                 {item.description}
               </p>
               {item.tech && item.tech.length > 0 ? (
@@ -106,7 +106,7 @@ export default function TimelineCard({
                   {item.tech.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-full bg-charcoal-lighter px-3 py-1 text-xs text-gray-300"
+                      className="rounded-full bg-charcoal-lighter px-3 py-1 text-xs text-soft"
                     >
                       {tech}
                     </span>
